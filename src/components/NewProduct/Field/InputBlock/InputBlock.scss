@@ -1,0 +1,18 @@
+.newProduct__field__formInput {
+	display: flex;
+	justify-content: space-between;
+	width: 60.6rem;
+	height: 5rem;
+	margin-top: 3.5rem;
+
+	&__label {
+		padding-top: 1.3rem;
+		font-family: 'PT Sans';
+		font-style: normal;
+		font-weight: normal;
+		font-size: 1.8rem;
+		line-height: 2.3rem;
+
+		color: #212121;
+	}
+}

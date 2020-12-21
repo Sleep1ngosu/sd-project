@@ -1,0 +1,13 @@
+@import '../../animations/animations.scss';
+
+.Main__wrapper {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	width: 114rem;
+	height: 54.9rem;
+	margin: 0 auto;
+	margin-top: 6.7rem;
+	background: url('../../assets/images/BG_main.jpg') no-repeat;
+	animation: transit 0.3s ease-out;
+}

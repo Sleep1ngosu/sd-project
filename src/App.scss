@@ -1,0 +1,110 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+	height: 100%;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.App__wrapper {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+.App {
+	&__header {
+		display: flex;
+		max-width: 100vw;
+		height: 18rem;
+		background-color: #000000;
+		flex: 0 0 auto;
+
+		&__logo {
+			width: 8.6rem;
+			height: 8.6rem;
+			margin-left: 15rem;
+			margin-top: 3.8rem;
+		}
+
+		&__sitename {
+			width: 16.9rem;
+			height: 3.8rem;
+			margin-top: 7.64rem;
+			margin-left: 0.8rem;
+		}
+
+		&__contacts {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			width: 36rem;
+			height: 8.3rem;
+			margin-top: 4.1rem;
+			margin-left: auto;
+			margin-right: 14.7rem;
+
+			&__text {
+				font-family: 'PT Sans';
+				font-style: normal;
+				font-weight: bold;
+				font-size: 2rem;
+				line-height: 2.6rem;
+
+				color: #ffba0a;
+			}
+		}
+	}
+
+	&__body {
+		display: flex;
+		flex: 1 0 auto;
+		background-color: #232e3e;
+		z-index: 0;
+	}
+
+	&__footer {
+		display: flex;
+		flex: 0 0 auto;
+		max-width: 100vw;
+		height: 18rem;
+		background-color: #333333;
+		justify-self: flex-end;
+
+		&__contacts {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			height: 11rem;
+			margin-left: 15.4rem;
+			margin-top: 2.9rem;
+
+			&__title {
+				font-family: 'PT Sans';
+				font-style: normal;
+				font-weight: normal;
+				font-size: 2.2rem;
+				line-height: 2.8rem;
+				color: #b8b8b8;
+			}
+
+			&__text {
+				font-family: 'PT Sans';
+				font-style: normal;
+				font-weight: normal;
+				font-size: 2rem;
+				line-height: 2.6rem;
+				color: #ffba0a;
+			}
+		}
+	}
+}

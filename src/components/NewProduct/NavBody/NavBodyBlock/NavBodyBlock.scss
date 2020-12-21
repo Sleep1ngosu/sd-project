@@ -1,0 +1,24 @@
+.newProduct__navBodyBlock__wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20rem;
+	height: 5.6rem;
+	background-color: #888888;
+	border-radius: 2rem 2rem 0 0;
+	cursor: pointer;
+}
+
+.newProduct__navBodyBlock__text {
+	font-family: 'PT Sans';
+	font-style: normal;
+	font-weight: normal;
+	font-size: 2.2rem;
+	line-height: 2.8rem;
+
+	color: #ffffff;
+}
+
+.newProduct__navBodyBlock__active {
+	background-color: #627aba;
+}
