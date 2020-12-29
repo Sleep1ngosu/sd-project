@@ -1,0 +1,56 @@
+.itemType {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 73.3rem;
+	height: 5rem;
+	margin-top: 2.6rem;
+
+	&__label {
+		font-family: 'PT Sans';
+		font-style: normal;
+		font-weight: normal;
+		font-size: 1.8rem;
+		line-height: 2.3rem;
+
+		color: #212121;
+	}
+
+	&__input {
+		&__wrapper {
+			display: flex;
+			justify-content: space-between;
+			width: 49.7rem;
+			height: 5rem;
+		}
+
+		&__input,
+		&__search {
+			border: 0.1rem solid #888888;
+			height: 5rem;
+			border-radius: 1.5rem;
+		}
+
+		&__input {
+			width: 37rem;
+			outline: none;
+
+			padding-left: 2.6rem;
+			font-family: 'PT Sans';
+			font-style: normal;
+			font-weight: normal;
+			font-size: 1.8rem;
+			line-height: 2.3rem;
+
+			color: #000000;
+		}
+
+		&__search {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 10rem;
+			cursor: pointer;
+		}
+	}
+}

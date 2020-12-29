@@ -1,0 +1,12 @@
+@import '../../../animations/animations.scss';
+
+.newProduct__fieldPhoto {
+	position: relative;
+	width: 114rem;
+	background-color: #fff;
+	margin-top: 1.4rem;
+	margin-bottom: 10.1rem;
+	padding-left: 1.9rem;
+	padding-bottom: 3rem;
+	animation: transit 0.3s ease-out;
+}

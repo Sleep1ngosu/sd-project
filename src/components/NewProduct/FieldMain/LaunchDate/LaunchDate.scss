@@ -1,0 +1,46 @@
+.launchDate {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 60.6rem;
+	height: 5rem;
+	margin-top: 2.6rem;
+
+	&__label {
+		font-family: 'PT Sans';
+		font-style: normal;
+		font-weight: normal;
+		font-size: 1.8rem;
+		line-height: 2.3rem;
+	}
+
+	&__input {
+		&__wrapper {
+			position: relative;
+		}
+
+		&__input {
+			height: 5rem;
+			width: 37rem;
+			border-radius: 1.5rem;
+			border: 0.1rem solid #888888;
+			outline: none;
+
+			padding-left: 2.6rem;
+			font-family: 'PT Sans';
+			font-style: normal;
+			font-weight: normal;
+			font-size: 1.8rem;
+			line-height: 2.3rem;
+
+			color: #000000;
+		}
+
+		&__icon {
+			position: absolute;
+			top: 1rem;
+			right: 0.8rem;
+			cursor: pointer;
+		}
+	}
+}

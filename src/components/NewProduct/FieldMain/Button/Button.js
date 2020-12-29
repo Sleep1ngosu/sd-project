@@ -7,6 +7,7 @@ const Button = (props) => {
 			style={props.style}
 			onClick={props.onClick}
 			className="newProduct__field__button"
+			type={props.type}
 		>
 			{props.text}
 		</button>

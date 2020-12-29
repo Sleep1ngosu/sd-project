@@ -1,11 +1,14 @@
-.newProduct__field {
+@import '../../../animations/animations.scss';
+
+.newProduct__Main {
+	position: relative;
 	width: 114rem;
-	height: 138.9rem;
 	background-color: #fff;
 	margin-top: 1.4rem;
 	margin-bottom: 10.1rem;
-	padding-top: 6.2rem;
+	// padding-top: 6.2rem;
 	padding-left: 1.9rem;
+	animation: transit 0.3s ease-out;
 
 	&__buttons {
 		display: flex;

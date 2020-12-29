@@ -19,7 +19,7 @@ const MenuBlock = (props) => {
 	}
 
 	return (
-		<Link to={path}>
+		<Link to={path} style={{ textDecoration: 'none' }}>
 			<div className="MenuBlock__wrapper">
 				<div className="MenuBlock__icon">
 					<img src={renderedIcon} alt="icon" />
