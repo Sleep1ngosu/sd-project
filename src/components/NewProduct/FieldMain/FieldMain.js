@@ -26,8 +26,8 @@ const Main = (props) => {
 		sp_id_value: undefined,
 		price: '0.00',
 		quantity: 0,
-		battery: 'N',
-		dangerous: 'NA',
+		battery: 'NO',
+		dangerous: 'Not Applicable',
 	})
 
 	const {
@@ -76,16 +76,19 @@ const Main = (props) => {
 
 	return (
 		<form
+			autoComplete="off"
 			onSubmit={(e) => onSubmit(e)}
 			style={formStyle}
 			className="newProduct__Main"
 		>
 			<Parent name="parent_id" value={parent_id} />
+			{/**not required */}
 			<ItemType
 				name="item_type"
 				value={item_type}
 				onChange={(e) => onChange(e)}
 			/>
+			{/**required */}
 			<InputBlock
 				max="30"
 				label="SKU"
@@ -95,7 +98,9 @@ const Main = (props) => {
 				name="sku"
 				value={sku}
 				onChange={(e) => onChange(e)}
+				required={true}
 			/>
+			{/**required */}
 			<InputBlockSelect
 				disabled="disabled"
 				marginTop="2.6rem"
@@ -108,6 +113,7 @@ const Main = (props) => {
 				value={sp_id_type}
 				onChange={(e) => onChange(e)}
 			/>
+			{/**required */}
 			<InputBlock
 				marginTop="2.6rem"
 				inputWidth="37rem"
@@ -118,8 +124,11 @@ const Main = (props) => {
 				value={sp_id_value}
 				onChange={(e) => onChange(e)}
 			/>
+			{/**not required */}
 			<CreateDate />
+			{/**not required */}
 			<LaunchDate />
+			{/**not required */}
 			<InputBlock
 				marginTop="2.6rem"
 				inputWidth="37rem"
@@ -128,7 +137,9 @@ const Main = (props) => {
 				name="price"
 				value={price}
 				onChange={(e) => onChange(e)}
+				required={true}
 			/>
+			{/**required */}
 			<InputBlock
 				marginTop="2.6rem"
 				inputWidth="37rem"
@@ -138,6 +149,7 @@ const Main = (props) => {
 				value={quantity}
 				onChange={(e) => onChange(e)}
 			/>
+			{/**not required */}
 			<InputBlockSelect
 				disabled="disabled"
 				marginTop="2.6rem"
@@ -150,6 +162,7 @@ const Main = (props) => {
 				value={battery}
 				onChange={(e) => onChange(e)}
 			/>
+			{/**required */}
 			<InputBlockSelect
 				marginTop="2.6rem"
 				disabled="disabled"
@@ -161,12 +174,15 @@ const Main = (props) => {
 				value={dangerous}
 				onChange={(e) => onChange(e)}
 			/>
+			{/**required */}
 			<InputBlock
 				marginTop="2.6rem"
 				inputWidth="37rem"
 				widthBlock="60.6rem"
 				label="ASIN"
+				disabled="disabled"
 			/>
+			{/**empty */}
 			<InputBlockSelect
 				marginTop="2.6rem"
 				disabled="disabled"
@@ -178,8 +194,13 @@ const Main = (props) => {
 				value={variation_type}
 				onChange={(e) => onChange(e)}
 			/>
-			<VariationText name="variation_text" value={variation_text} />
-
+			{/**not required */}
+			<VariationText
+				isType={data.variation_type}
+				name="variation_text"
+				value={variation_text}
+			/>
+			{/**required if variation_type is not empty */}
 			<div className="newProduct__Main__buttons">
 				<Button
 					type="submit"

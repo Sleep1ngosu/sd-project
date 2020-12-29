@@ -1,0 +1,39 @@
+.newProduct__Field__textarea__textarea {
+	position: relative;
+	// width: 37rem;
+	height: 100%;
+	border: 0.1rem solid #888888;
+	border-radius: 1.5rem;
+	outline: none;
+	padding-left: 2.6rem;
+	padding-top: 1rem;
+	padding-right: 2.6rem;
+	resize: none;
+
+	font-family: 'PT Sans';
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1.8rem;
+	line-height: 2.3rem;
+
+	color: #000000;
+}
+
+.newProduct__field__textarea {
+	display: flex;
+	justify-content: space-between;
+	// width: 60.6rem;
+	height: 5rem;
+	// margin-top: 3.5rem;
+
+	&__label {
+		padding-top: 1.3rem;
+		font-family: 'PT Sans';
+		font-style: normal;
+		font-weight: normal;
+		font-size: 1.8rem;
+		line-height: 2.3rem;
+
+		color: #212121;
+	}
+}

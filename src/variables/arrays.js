@@ -39,6 +39,18 @@ const arrays = {
 				'Manufacturer',
 			],
 			height: ['5', '5', '20', '13', '13', '13', '13', '5'],
+			max: ['200', '50', '2000', '300', '300', '300', '300', '300', '50'],
+			names: [
+				'title',
+				'brand',
+				'description',
+				'bullet_1',
+				'bullet_2',
+				'bullet_3',
+				'bullet_4',
+				'bullet_5',
+				'manufacturer',
+			],
 		},
 		photoField: {
 			photoType: {

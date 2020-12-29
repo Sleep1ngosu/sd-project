@@ -1,25 +1,25 @@
 import React from 'react'
-import './InputBlock.scss'
-import Input from './Input/Input'
+import './TextArea.scss'
 
-/**
- *
- *  props: 	{label, height, widthBlock, inputWidth, max, name, value, onchange, type}
- */
-
-const InputBlock = (props) => {
+const TextArea = (props) => {
 	let style = {
 		width: props.widthBlock,
 		height: `${props.heightBlock}rem`,
 		marginTop: props.marginTop,
 	}
 
+	let styleArea = {
+		width: props.inputWidth,
+	}
+
 	return (
-		<div style={style} className="newProduct__field__formInput">
-			<span className="newProduct__field__formInput__label">
+		<div style={style} className="newProduct__field__textarea">
+			<span className="newProduct__field__textarea__label">
 				{props.label}
 			</span>
-			<Input
+			<textarea
+				style={styleArea}
+				className="newProduct__Field__textarea__textarea"
 				width={props.inputWidth}
 				max={props.max}
 				type={props.type}
@@ -33,4 +33,4 @@ const InputBlock = (props) => {
 	)
 }
 
-export default InputBlock
+export default TextArea

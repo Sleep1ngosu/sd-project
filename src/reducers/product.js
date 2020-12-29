@@ -56,6 +56,12 @@ export default (state = initialState, action) => {
 				battery,
 				dangerous,
 			}
+		case SET_DESCRIPTION: {
+			return {
+				...state,
+				description: action.payload,
+			}
+		}
 		default:
 			return state
 	}
