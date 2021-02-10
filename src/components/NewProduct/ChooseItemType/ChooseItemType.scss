@@ -1,0 +1,131 @@
+.newProduct__chooseItemType {
+	position: absolute;
+	top: 4rem;
+	left: -15rem;
+	display: flex;
+	flex-direction: column;
+	width: 97.3rem;
+	height: 62.7rem;
+	border: 0.1rem solid #888888;
+	background-color: #fff;
+	z-index: 10;
+
+	&__header {
+		display: flex;
+		flex-direction: column;
+		padding-left: 3.2rem;
+
+		&__title {
+			display: flex;
+			align-items: center;
+			width: 100%;
+			height: 9.9rem;
+
+			font-family: 'PT Sans';
+			font-style: normal;
+			font-weight: normal;
+			font-size: 1.8rem;
+			line-height: 2.3rem;
+
+			color: #000000;
+		}
+
+		&__searchBar {
+			display: flex;
+			flex-direction: row;
+			flex-grow: 1;
+
+			&__search {
+				display: flex;
+				justify-content: space-between;
+				width: 52.5rem;
+				height: 5rem;
+
+				&__input {
+					width: 37rem;
+					height: 5rem;
+					padding-left: 1.8rem;
+					border: 0.1rem solid #888888;
+					border-radius: 1.5rem;
+					outline: none;
+
+					font-family: 'Roboto';
+					font-style: normal;
+					font-weight: normal;
+					font-size: 1.8rem;
+					line-height: 2.1rem;
+
+					color: #000000;
+				}
+
+				&__button {
+					width: 14rem;
+					height: 5rem;
+					background-color: #ffba0a;
+					border: 0.1rem solid #edb014;
+					border-radius: 1.5rem;
+					outline: none;
+					cursor: pointer;
+
+					font-family: 'Roboto';
+					font-style: normal;
+					font-weight: bold;
+					font-size: 1.8rem;
+					line-height: 2.1rem;
+
+					color: #ffffff;
+				}
+			}
+
+			&__results {
+				display: flex;
+				align-items: center;
+				margin-left: 6.5rem;
+				height: 5rem;
+				width: 22rem;
+
+				font-family: 'PT Sans';
+				font-style: normal;
+				font-weight: normal;
+				font-size: 1.8rem;
+				line-height: 2.3rem;
+
+				color: #645e5e;
+			}
+		}
+	}
+
+	&__body {
+		display: flex;
+		flex-direction: column;
+		flex: 1 1 auto;
+		margin-top: 5.2rem;
+		&__header {
+			display: grid;
+			align-items: center;
+			text-align: center;
+			grid-template-columns: 1fr 1fr 1fr;
+			grid-template-rows: 1fr;
+			height: 5.5rem;
+			width: 100%;
+			background-color: #f2f2f2;
+
+			&__title {
+				font-family: 'PT Sans';
+				font-style: normal;
+				font-weight: bold;
+				font-size: 2rem;
+				line-height: 2.6rem;
+				/* identical to box height */
+
+				color: #212121;
+			}
+		}
+
+		&__blocks {
+			flex: 1 1 auto;
+			overflow-y: scroll;
+			max-height: 36.9rem;
+		}
+	}
+}

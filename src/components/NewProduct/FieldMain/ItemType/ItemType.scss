@@ -46,11 +46,18 @@
 		}
 
 		&__search {
-			display: flex;
-			justify-content: center;
-			align-items: center;
+			position: relative;
 			width: 10rem;
-			cursor: pointer;
+
+			&__icon {
+				position: relative;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				height: 100%;
+				cursor: pointer;
+			}
 		}
 	}
 }

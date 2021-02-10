@@ -34,9 +34,17 @@
 	}
 
 	&__addPhotoIcon {
-		position: absolute;
-		right: 5.2rem;
-		top: 2.2rem;
-		cursor: pointer;
+		position: relative;
+
+		&__icon {
+			cursor: pointer;
+		}
+
+		&__wrapper {
+			position: absolute;
+			right: 5.2rem;
+			top: 2.2rem;
+			// cursor: pointer;
+		}
 	}
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './NewProduct.scss'
 import NavLinks from './NavLinks/NavLinks'
-import NavBody from './NavBody/NavBody'
+import NavBody from '../NavBody/NavBody'
 import FieldMain from './FieldMain/FieldMain'
 import FieldDescription from './FieldDescription/FieldDescription'
 import FieldPhoto from './FieldPhoto/FieldPhoto'
@@ -9,6 +9,7 @@ import FieldSizes from './FieldSizes/FieldSizes'
 
 const NewProduct = () => {
 	let [active, setActive] = useState(0)
+	let titles = ['Основные', 'Описание', 'Изображение', 'Размеры']
 
 	const changeActive = (e) => {
 		setActive(e.target.id)
@@ -29,8 +30,12 @@ const NewProduct = () => {
 
 	return (
 		<div className="newProduct__wrapper">
-			<NavLinks />
-			<NavBody active={active} onClick={(e) => changeActive(e)} />
+			<NavLinks width="17.4rem" text="Создание товара" />
+			<NavBody
+				titles={titles}
+				active={active}
+				onClick={(e) => changeActive(e)}
+			/>
 			{renderedComponent}
 		</div>
 	)

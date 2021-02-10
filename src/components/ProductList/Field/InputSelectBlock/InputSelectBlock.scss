@@ -1,0 +1,30 @@
+.productList__field__filter__inputSelectBlock {
+	position: relative;
+	width: 38rem;
+	height: 5.1rem;
+	border: 0.1rem solid #888888;
+	border-radius: 1.5rem;
+
+	&__icon {
+		position: absolute;
+		cursor: pointer;
+	}
+
+	&__input {
+		width: 100%;
+		height: 100%;
+		border: none;
+		outline: none;
+		border-radius: 1.5rem;
+		padding-left: 3.4rem;
+
+		font-family: 'PT Sans';
+		font-style: normal;
+		font-weight: bold;
+		font-size: 2rem;
+		line-height: 2.6rem;
+		/* identical to box height */
+
+		color: #212121;
+	}
+}

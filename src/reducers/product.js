@@ -7,14 +7,14 @@ import {
 
 const initialState = {
 	pk: '',
-	is_parent: undefined,
-	parent_id: undefined,
-	variation_type: undefined,
-	variation_text: undefined,
+	is_parent: '',
+	parent_id: '',
+	variation_type: '',
+	variation_text: '',
 	item_type: '',
 	sku: '',
 	sp_id_type: 'UPC',
-	sp_id_value: undefined,
+	sp_id_value: '',
 	price: '0.00',
 	quantity: 0,
 	battery: 'N',
@@ -60,6 +60,18 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				description: action.payload,
+			}
+		}
+		case SET_SIZES: {
+			return {
+				...state,
+				dimensions: action.payload,
+			}
+		}
+		case SET_PHOTOS: {
+			return {
+				...state,
+				photos: action.payload,
 			}
 		}
 		default:

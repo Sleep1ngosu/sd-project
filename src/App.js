@@ -5,6 +5,8 @@ import Logo from './assets/images/Logo.png'
 import SiteNameEn from './assets/images/siteNameEn.png'
 import Main from './components/Main/Main'
 import NewProduct from './components/NewProduct/NewProduct'
+import ProductList from './components/ProductList/ProductList'
+import CreateListing from './components/CreateListing/CreateListing'
 
 const App = () => {
 	return (
@@ -32,6 +34,12 @@ const App = () => {
 						<Route
 							path="/products/new_product"
 							component={NewProduct}
+							exact
+						/>
+						<Route path="/products" component={ProductList} exact />
+						<Route
+							path="/listing/listing_products"
+							component={CreateListing}
 							exact
 						/>
 					</Switch>

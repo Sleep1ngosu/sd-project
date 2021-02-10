@@ -46,3 +46,21 @@ export const setDescription = (payload) => async (dispatch) => {
 		dispatch({ type: SET_DESCRIPTION, payload })
 	}
 }
+
+export const setSizes = (payload) => async (dispatch) => {
+	dispatch({ type: SET_SIZES, payload })
+}
+
+export const setPhotos = (payload) => async (dispatch) => {
+	let array = []
+
+	payload.forEach((e) => {
+		array.push(e.photo_type)
+	})
+	let newArray = convertToBdValues(array)
+	payload.forEach((e, i) => {
+		e.photo_type = newArray[i]
+	})
+
+	dispatch({ type: SET_PHOTOS, payload })
+}

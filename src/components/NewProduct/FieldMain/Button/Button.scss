@@ -1,4 +1,5 @@
 .newProduct__field__button {
+	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -14,4 +15,14 @@
 	line-height: 2.1rem;
 
 	color: #ffffff;
+
+	&__input {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		left: 0;
+		right: 0;
+		opacity: 0;
+		cursor: pointer;
+	}
 }

@@ -5,7 +5,11 @@ const CreateDate = () => {
 	return (
 		<div className="createDate">
 			<span className="createDate__label">Create date</span>
-			<input className="createDate__input" type="text" />
+			<input
+				disabled="disabled"
+				className="createDate__input"
+				type="text"
+			/>
 		</div>
 	)
 }

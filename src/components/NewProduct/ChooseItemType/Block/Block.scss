@@ -1,0 +1,46 @@
+.itemTypeBlock {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr;
+	height: 7.3rem;
+	width: 100%;
+	border-bottom: 0.1rem solid #888888;
+
+	&:nth-child(2n) {
+		background-color: #f2f2f2;
+	}
+
+	&__keyword,
+	&__path,
+	&__type {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+
+		font-family: 'Roboto', sans-serif;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 1.8rem;
+		line-height: 2.1rem;
+		color: black;
+		padding-right: 1rem;
+	}
+
+	&__keyword {
+		color: #edb014 !important;
+		justify-content: flex-start;
+		padding-left: 3.2rem;
+	}
+
+	&__path {
+		align-items: flex-start;
+		justify-content: flex-start;
+		word-wrap: normal;
+		max-width: 31.8rem;
+		margin-left: 1rem;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		line-height: 2.5rem;
+	}
+}

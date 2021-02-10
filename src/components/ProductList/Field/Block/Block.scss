@@ -1,0 +1,102 @@
+.productList__field__block__wrapper {
+	position: relative;
+	display: grid;
+	grid-template-rows: 1fr;
+	width: 100%;
+	height: 13rem;
+
+	font-family: 'PT Sans';
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1.4rem;
+	line-height: 1.8rem;
+
+	color: #000000;
+}
+
+.block__element {
+	display: flex;
+	align-items: flex-start;
+	flex-wrap: nowrap;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	padding-top: 1rem;
+	max-width: 20.75rem;
+	overflow: hidden;
+	max-height: 12rem;
+
+	font-family: 'PT Sans';
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1.4rem;
+	line-height: 1.8rem;
+
+	color: #000000;
+}
+
+.productList__field__block {
+	// &__text {
+	// 	display: block;
+	// 	// padding-top: 1rem;
+	// 	// padding-bottom: 1rem;
+	// 	max-width: 18.75rem;
+	// 	word-wrap: normal;
+	// 	text-align: center;
+	// 	max-height: 11rem;
+	// 	overflow: hidden;
+	// }
+
+	&__createDate,
+	&__launchDate,
+	&__sku {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__isParent {
+		display: grid;
+
+		&__icon {
+			width: 4.2rem;
+			height: 4.2rem;
+			align-self: center;
+			justify-self: center;
+			cursor: pointer;
+		}
+	}
+
+	&__settings {
+		position: relative;
+		display: grid;
+
+		&__icon {
+			width: 3.7rem;
+			height: 2rem;
+			align-self: center;
+			justify-self: center;
+			cursor: pointer;
+		}
+	}
+
+	&__image {
+		display: grid;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__sku {
+		position: relative;
+		padding-left: 4rem;
+	}
+
+	&__moreIcon {
+		position: absolute;
+		left: 1rem;
+		width: 2.2rem;
+		height: 2.1rem;
+		top: 50%;
+		transform: translateY(-30%);
+		cursor: pointer;
+	}
+}

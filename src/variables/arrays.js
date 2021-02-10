@@ -90,6 +90,32 @@ const arrays = {
 				size: ['FT', 'IN', 'CM', 'MM', 'M'],
 				weight: ['LB', 'OZ', 'KG', 'GR'],
 			},
+			names_size: [
+				'item_weight',
+				'package_weight',
+				'package_width',
+				'package_length',
+				'package_height',
+			],
+			names_units: [
+				'item_weight_mu',
+				'package_weight_mu',
+				'package_width_mu',
+				'package_length_mu',
+				'package_height_mu',
+			],
+		},
+	},
+	productList: {
+		header: {
+			values: ['SKU', 'Title', 'Create date', 'Launch date'],
+		},
+	},
+	createListing: {
+		productList: {
+			header: {
+				values: ['SKU', 'Title'],
+			},
 		},
 	},
 }

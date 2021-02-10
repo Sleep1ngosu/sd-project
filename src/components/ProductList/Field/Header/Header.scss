@@ -1,0 +1,45 @@
+.productList__field__header {
+	display: grid;
+	width: 100%;
+	height: 7.8rem;
+	background-color: #f2f2f2;
+
+	&__element {
+		align-self: center;
+		justify-self: center;
+
+		font-family: 'PT Sans';
+		font-style: normal;
+		font-weight: bold;
+		font-size: 2rem;
+		line-height: 2.6rem;
+		/* identical to box height */
+
+		color: #212121;
+	}
+
+	&__filter {
+		position: relative;
+		display: grid;
+
+		&__icon {
+			width: 4.5rem;
+			height: 4.2rem;
+			align-self: center;
+			justify-self: center;
+			cursor: pointer;
+		}
+	}
+
+	&__settings {
+		display: grid;
+
+		&__icon {
+			width: 4.6rem;
+			height: 4.2rem;
+			align-self: center;
+			justify-self: center;
+			cursor: pointer;
+		}
+	}
+}

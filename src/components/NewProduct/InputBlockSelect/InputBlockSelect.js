@@ -34,6 +34,7 @@ const InputBlockSelect = (props) => {
 					style={inputStyle}
 					value={props.value}
 					onChange={(e) => props.onChange(e)}
+					name={props.name}
 				/>
 		  ))
 		: (renderedInput = (
@@ -43,6 +44,7 @@ const InputBlockSelect = (props) => {
 					style={inputStyle}
 					value={props.value}
 					onChange={(e) => props.onChange(e)}
+					name={props.name}
 				/>
 		  ))
 
@@ -50,11 +52,18 @@ const InputBlockSelect = (props) => {
 		width: props.widthBlock,
 		marginTop: props.marginTop,
 		paddingTop: props.paddingTop,
+		marginLeft: props.marginLeft,
+	}
+
+	let labelColor = {
+		color: props.color,
 	}
 
 	return (
 		<div style={style} className="sitype">
-			<span className="sitype__label">{props.label}</span>
+			<span style={labelColor} className="sitype__label">
+				{props.label}
+			</span>
 			<div className="sitype__input__wrapper">
 				{renderedInput}
 				<label>

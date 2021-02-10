@@ -1,0 +1,7 @@
+@import '../../animations/animations.scss';
+
+.productList__wrapper {
+	width: 114rem;
+	margin: 0 auto;
+	animation: transit 0.3s ease-out;
+}

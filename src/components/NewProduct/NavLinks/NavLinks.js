@@ -2,7 +2,11 @@ import React from 'react'
 import './NavLinks.scss'
 import { Link } from 'react-router-dom'
 
-function NavLinks() {
+function NavLinks(props) {
+	let style = {
+		width: props.width,
+	}
+
 	return (
 		<div className="newProduct__nav__links">
 			<div className="newProduct__nav__links__main">
@@ -12,8 +16,11 @@ function NavLinks() {
 					</span>
 				</Link>
 			</div>
-			<div className="newProduct__nav__links__createProduct">
-				Создание товара
+			<div
+				style={style}
+				className="newProduct__nav__links__createProduct"
+			>
+				{props.text}
 			</div>
 		</div>
 	)

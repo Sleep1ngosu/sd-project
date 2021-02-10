@@ -13,6 +13,7 @@ import CreateDate from './CreateDate/CreateDate'
 import LaunchDate from './LaunchDate/LaunchDate'
 import VariationText from './VariationText/VariationText'
 import { setMain } from '../../../actions/product'
+import { createProduct } from '../../../actions/createProduct'
 
 const Main = (props) => {
 	let [data, setData] = useState({
@@ -70,6 +71,10 @@ const Main = (props) => {
 		props.setMain(data)
 	}
 
+	const onCreate = async () => {
+		await props.createProduct(props.data)
+	}
+
 	const onChange = (e) => {
 		setData({ ...data, [e.target.name]: e.target.value })
 	}
@@ -85,7 +90,7 @@ const Main = (props) => {
 			{/**not required */}
 			<ItemType
 				name="item_type"
-				value={item_type}
+				value={props.id}
 				onChange={(e) => onChange(e)}
 			/>
 			{/**required */}
@@ -207,10 +212,22 @@ const Main = (props) => {
 					style={MainLeftButtonStyle}
 					text="Сохранить"
 				/>
-				<Button style={MainRightButtonStyle} text="Создать вариацию" />
+				<Button
+					type="button"
+					style={MainRightButtonStyle}
+					text="Создать вариацию"
+					onClick={onCreate}
+				/>
 			</div>
 		</form>
 	)
 }
 
-export default connect(null, { setMain })(Main)
+const mapStateToProps = (state) => {
+	return {
+		data: state.product,
+		id: state.itemType.id,
+	}
+}
+
+export default connect(mapStateToProps, { setMain, createProduct })(Main)
