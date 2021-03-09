@@ -20,8 +20,11 @@ import { setBlocker } from '../../../../actions/blocker'
 
 const Block = (props) => {
 	let style, styleTextBlock, settingsStyle
-	if (props.index % 2 === 0) {
+	if (props.serial % 2 === 0) {
 		style = { backgroundColor: 'white' }
+	} else if (props.isChildren) {
+		// color for childs
+		style = { backgroundColor: '#f0dfdf' }
 	} else style = { backgroundColor: '#f2f2f2' }
 
 	let [isExpanded, setExpanded] = useState(false)

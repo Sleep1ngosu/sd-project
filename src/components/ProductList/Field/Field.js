@@ -77,7 +77,8 @@ const Field = (props) => {
 		}
 	}
 
-	let blocksList = []
+	let blocksList = [],
+		index = 1
 	products.forEach((product, i) => {
 		if (!product.parent_id) {
 			const childs = []
@@ -86,9 +87,11 @@ const Field = (props) => {
 					childs.push(pr.id)
 				}
 			})
+			index++
 			blocksList.push(
 				<Block
 					key={`productList__field__${i}`}
+					serial={index}
 					index={i}
 					title={product.description.title}
 					sku={product.sku}
