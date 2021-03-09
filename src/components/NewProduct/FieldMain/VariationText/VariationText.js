@@ -3,11 +3,25 @@ import './VariationText.scss'
 
 const VariationText = (props) => {
 	let renderedArea
-	console.log(props.isType)
 	props.isType === undefined
-		? (renderedArea = <textarea className="variationText__textarea" />)
+		? (renderedArea = (
+				<textarea
+					value={props.value}
+					className="variationText__textarea"
+					onChange={(e) => props.onChange(e)}
+					name={props.name}
+					maxLength="20"
+				/>
+		  ))
 		: (renderedArea = (
-				<textarea required className="variationText__textarea" />
+				<textarea
+					value={props.value}
+					required
+					className="variationText__textarea"
+					onChange={(e) => props.onChange(e)}
+					name={props.name}
+					maxLength="20"
+				/>
 		  ))
 
 	return (

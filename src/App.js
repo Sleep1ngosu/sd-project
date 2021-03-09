@@ -7,6 +7,8 @@ import Main from './components/Main/Main'
 import NewProduct from './components/NewProduct/NewProduct'
 import ProductList from './components/ProductList/ProductList'
 import CreateListing from './components/CreateListing/CreateListing'
+import LookPhoto from './components/ProductList/LookPhoto/LookPhoto'
+import Blocker from './components/Blocker/Blocker'
 
 const App = () => {
 	return (
@@ -29,13 +31,11 @@ const App = () => {
 					</div>
 				</header>
 				<main className="App__body">
+					<Blocker />
+					<LookPhoto />
 					<Switch>
 						<Route path="/" component={Main} exact />
-						<Route
-							path="/products/new_product"
-							component={NewProduct}
-							exact
-						/>
+						<Route path="/products/new_product" component={NewProduct} exact />
 						<Route path="/products" component={ProductList} exact />
 						<Route
 							path="/listing/listing_products"
@@ -46,9 +46,7 @@ const App = () => {
 				</main>
 				<footer className="App__footer">
 					<div className="App__footer__contacts">
-						<span className="App__footer__contacts__title">
-							Контакты
-						</span>
+						<span className="App__footer__contacts__title">Контакты</span>
 						<span className="App__footer__contacts__text">
 							email: piskun.victor@gmail.com
 						</span>

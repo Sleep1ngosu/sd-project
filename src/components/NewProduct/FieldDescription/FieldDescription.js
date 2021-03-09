@@ -6,35 +6,26 @@ import InputBlock from '../InputBlock/InputBlock'
 import arrays from '../../../variables/arrays'
 import { setDescription } from '../../../actions/product'
 import TextArea from '../TextArea/TextArea'
+import Alert from '../../Alert/Alert'
 
 const FieldDescription = (props) => {
 	let [data, setData] = useState({
-		title: '',
-		brand: '',
-		description: '',
-		bullet_1: '',
-		bullet_2: '',
-		bullet_3: '',
-		bullet_4: '',
-		bullet_5: '',
-		manufacturer: '',
+		title: props.description.title || '',
+		brand: props.description.brand || '',
+		description: props.description.description || '',
+		bullet_1: props.description.bullet_1 || '',
+		bullet_2: props.description.bullet_2 || '',
+		bullet_3: props.description.bullet_3 || '',
+		bullet_4: props.description.bullet_4 || '',
+		bullet_5: props.description.bullet_5 || '',
+		manufacturer: props.description.manufacturer || '',
+		search_terms: props.description.search_terms || '',
 	})
 
-	let {
-		title,
-		brand,
-		description,
-		bullet_1,
-		bullet_2,
-		bullet_3,
-		bullet_4,
-		bullet_5,
-		manufacturer,
-	} = data
-
 	let formStyle = {
-		height: props.height,
+		// height: props.height,
 		paddingTop: props.paddingTop,
+		paddingBottom: '10rem',
 	}
 
 	let DescButtonStyle = {
@@ -43,7 +34,7 @@ const FieldDescription = (props) => {
 		color: 'white',
 		width: '14rem',
 		marginLeft: '44.4rem',
-		marginTop: '10rem',
+		marginTop: '7rem',
 	}
 
 	const onChange = (e) => {
@@ -64,13 +55,9 @@ const FieldDescription = (props) => {
 					type="text"
 					label={e}
 					name={arrays.newProductMain.descriptionField.names[i]}
-					value={
-						data[arrays.newProductMain.descriptionField.names[i]]
-					}
+					value={data[arrays.newProductMain.descriptionField.names[i]]}
 					widthBlock="104.6rem"
-					heightBlock={
-						arrays.newProductMain.descriptionField.height[i]
-					}
+					heightBlock={arrays.newProductMain.descriptionField.height[i]}
 					inputWidth="92rem"
 					marginTop="2.9rem"
 					max={arrays.newProductMain.descriptionField.max[i]}
@@ -87,9 +74,22 @@ const FieldDescription = (props) => {
 			className="newProduct__Main"
 		>
 			{descriptionList}
-			<Button style={DescButtonStyle} text="Сохранить" />
+			<Button type="submit" style={DescButtonStyle} text="Сохранить" />
+			<Alert
+				style={{
+					left: '50%',
+					transform: 'translateX(-50%)',
+					bottom: '2rem',
+				}}
+			/>
 		</form>
 	)
 }
 
-export default connect(null, { setDescription })(FieldDescription)
+const mapStateToProps = (state) => {
+	return {
+		description: state.editingProduct.editingProduct.description,
+	}
+}
+
+export default connect(mapStateToProps, { setDescription })(FieldDescription)

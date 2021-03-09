@@ -120,6 +120,7 @@ export const convertToBdValues = (array) => {
 				}
 				case 'OfferImage5': {
 					array[i] = 'OI5'
+					break
 				}
 				default: {
 					array[i] = array[i]

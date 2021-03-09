@@ -1,5 +1,3 @@
-import MenuIcon from '../../../assets/icons/MenuIcon.png'
-import Iconlist from '../../../assets/icons/Iconlist.png'
 import arrays from '../../../variables/arrays'
 
 // setup Header styles
@@ -15,7 +13,7 @@ export const productListHeaderSetup = () => {
 		)
 	})
 	let styleWrapper = {
-		gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 0.5fr',
+		gridTemplateColumns: '0.5fr 1fr 1fr 0.5fr',
 	}
 
 	return { headerList, styleWrapper }

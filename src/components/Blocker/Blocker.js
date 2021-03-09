@@ -1,8 +1,15 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import './Blocker.scss'
 
-const Blocker = () => {
-	return <div className="Blocker"></div>
+const Blocker = ({ isActive }) => {
+	return <div className={`${(!isActive && 'hide') || ''} Blocker`}></div>
 }
 
-export default Blocker
+const mapStateToProps = (state) => {
+	return {
+		isActive: state.blocker.isActive,
+	}
+}
+
+export default connect(mapStateToProps)(Blocker)

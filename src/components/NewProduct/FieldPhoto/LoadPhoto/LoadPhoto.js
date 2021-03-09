@@ -18,11 +18,10 @@ const LoadPhoto = (props) => {
 					buttype="image"
 					text="Загрузить фото"
 					style={buttonStyle}
+					onChange={props.onChange}
+					id={props.id}
 				/>
-				<div
-					onClick={(e) => props.onClose(e)}
-					className="loadPhoto__icon"
-				>
+				<div onClick={(e) => props.onClose(e)} className="loadPhoto__icon">
 					<CloseIcon style={{ transform: 'scale(1.4)' }} />
 				</div>
 			</div>

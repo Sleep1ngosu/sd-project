@@ -14,9 +14,7 @@ const TextArea = (props) => {
 
 	return (
 		<div style={style} className="newProduct__field__textarea">
-			<span className="newProduct__field__textarea__label">
-				{props.label}
-			</span>
+			<span className="newProduct__field__textarea__label">{props.label}</span>
 			<textarea
 				style={styleArea}
 				className="newProduct__Field__textarea__textarea"
@@ -28,6 +26,7 @@ const TextArea = (props) => {
 				onChange={(e) => props.onChange(e)}
 				disabled={props.disabled}
 				required={props.required}
+				maxLength={props.max}
 			/>
 		</div>
 	)

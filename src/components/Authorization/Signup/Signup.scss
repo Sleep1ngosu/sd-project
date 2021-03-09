@@ -1,0 +1,22 @@
+.signup {
+	display: flex;
+	flex-direction: column;
+	width: 60rem;
+	height: 80rem;
+	border: 0.1rem solid black;
+
+	&__title,
+	&__footer {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 10rem;
+		background-color: rgb(199, 0, 0);
+	}
+
+	&__inputFields {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+	}
+}

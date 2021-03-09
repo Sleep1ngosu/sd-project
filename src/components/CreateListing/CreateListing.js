@@ -23,7 +23,7 @@ const CreateListing = () => {
 	return (
 		<div className="createListing__wrapper">
 			<NavLinks text="Создание листинга" width="26.9rem" />
-			{+active === 0 ? <ListingSettings /> : null}
+			{+active === 1 ? <ListingSettings /> : null}
 			<NavBody
 				titles={titles}
 				active={active}

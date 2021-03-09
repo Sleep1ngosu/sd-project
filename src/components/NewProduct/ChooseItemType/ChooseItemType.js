@@ -24,7 +24,6 @@ const ChooseItemType = (props) => {
 		const response = await getItemTypes(search)
 		setFetchData(response.data)
 		props.setSearch(searchData)
-		console.log(response.data)
 	}
 
 	const onChange = (e) => {

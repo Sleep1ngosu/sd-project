@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './AddImage.scss'
-import InputBlock from '../../InputBlock/InputBlock'
 import InputBlockSelect from '../../InputBlockSelect/InputBlockSelect'
 import arrays from '../../../../variables/arrays'
 import AddPhotoIcon from '../../../../assets/icons/AddPhotoIcon.png'
 import LoadPhoto from '../LoadPhoto/LoadPhoto'
+import closeIcon from '../../../../assets/icons/closeIcon.png'
 
 const AddImage = (props) => {
 	let addPhotoStyle
 
-	if (props.index === props.active) {
+	if (props.id === props.active) {
 		addPhotoStyle = { display: 'block' }
 	} else {
 		addPhotoStyle = { display: 'none' }
@@ -24,33 +24,40 @@ const AddImage = (props) => {
 					widthBlock="91.6rem"
 					inputWidth="81.1rem"
 					name={props.photoTypeName}
-					value={props.value.photo_type}
-					onChange={(e) => props.onChange(e, props.index)}
+					value={props.value.image_type}
+					onChange={(e) => props.onChange(e, props.image.id_client)}
 					disabled="disabled"
 				/>
-				<InputBlock
-					label="Photo path"
-					widthBlock="91.6rem"
-					inputWidth="81.1rem"
-					name={props.photoPathName}
-					value={props.value.photo_path}
-					onChange={(e) => props.onChange(e, props.index)}
-					// marginTop="1.5rem"
-				/>
+				<div className="file">
+					<div className="label">File status: </div>
+					<div className="filename">
+						{!props.image.image ? 'Not uploaded' : 'Uploaded'}
+					</div>
+				</div>
 			</div>
 			<div className="newProduct__fieldPhoto__addPhotoIcon__wrapper">
 				<div className="newProduct__fieldPhoto__addPhotoIcon">
 					<div
-						onClick={(e) => props.onClick(e, props.index)}
+						onClick={(e) => props.onClick(e, props.image.id_client)}
 						className="newProduct__fieldPhoto__addPhotoIcon__icon"
 					>
 						<img src={AddPhotoIcon} alt="add photo icon" />
 					</div>
 					<LoadPhoto
+						onChange={props.onChangeFile}
 						style={addPhotoStyle}
 						onClose={(e) => props.onClose(e)}
+						id={props.id}
 					/>
 				</div>
+			</div>
+			<div className="newProduct__fieldPhoto__remove">
+				<img
+					onClick={(e) => props.onRemove(e, props.id_client)}
+					className="remove-icon"
+					src={closeIcon}
+					alt="remove icon"
+				/>
 			</div>
 			<div className="newProduct__fieldPhoto__horizontal"></div>
 		</div>

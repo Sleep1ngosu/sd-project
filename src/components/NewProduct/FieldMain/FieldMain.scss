@@ -17,4 +17,32 @@
 		margin-left: 29.2rem;
 		margin-top: 6.9rem;
 	}
+
+	&__edit {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		position: absolute;
+		top: 3rem;
+		right: 3rem;
+		width: 15rem;
+		height: 8rem;
+
+		&__text {
+			font-size: 1.8rem;
+			font-weight: bold;
+		}
+
+		&__changeBtn {
+			border-radius: 1.5rem;
+			height: 4rem;
+			width: 10rem;
+			border: none;
+			cursor: pointer;
+			background-color: #ffba0a;
+			color: white;
+			outline: none;
+		}
+	}
 }

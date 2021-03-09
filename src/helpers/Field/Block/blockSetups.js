@@ -1,12 +1,11 @@
 import MenuIcon from '../../../assets/icons/MenuIcon.png'
 import Iconlist from '../../../assets/icons/Iconlist.png'
-import arrays from '../../../variables/arrays'
 
 // setup styles for product_list type of <Field /> component
 // setup Block styles
 export const productListBlockSetup = (props, settingsIconStyle) => {
 	let styleDate = { display: 'flex' }
-	let styleWrapper = { gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 0.5fr' }
+	let styleWrapper = { gridTemplateColumns: '0.5fr 1fr 1fr 0.5fr' }
 	let renderedIcon = (
 		<div
 			style={settingsIconStyle}
@@ -22,7 +21,7 @@ export const productListBlockSetup = (props, settingsIconStyle) => {
 
 // setup styles for create_listing type of <Field /> component
 //setup Block styles
-export const createListingBlockSetup = () => {
+export const createListingBlockSetup = (addToListing) => {
 	let styleDate = { display: 'none' }
 	let styleWrapper = {
 		gridTemplateColumns: '1fr 1fr 1fr 1fr',
@@ -30,7 +29,7 @@ export const createListingBlockSetup = () => {
 	}
 	let renderedIcon = (
 		<div className="productList__field__block__settings__icon">
-			<img src={Iconlist} alt="icon list" />
+			<img onClick={addToListing} src={Iconlist} alt="icon list" />
 		</div>
 	)
 

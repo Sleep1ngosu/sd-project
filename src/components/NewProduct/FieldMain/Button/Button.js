@@ -1,24 +1,19 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import './Button.scss'
 
 const Button = (props) => {
-	const file = useRef('')
-
 	const inputImage =
 		(props.buttype === 'image' && (
 			<input
-				onChange={() => onChange()}
+				onChange={(e) => props.onChange(e)}
 				type="file"
 				className="newProduct__field__button__input"
 				accept=".jpg, .png, .jpeg"
-				ref={file}
+				id={props.id}
 			/>
 		)) ||
 		null
 
-	const onChange = () => {
-		console.log(file.current.files[0])
-	}
 	return (
 		<button
 			style={props.style}

@@ -3,10 +3,10 @@ import {
 	SET_SIZES,
 	SET_DESCRIPTION,
 	SET_PHOTOS,
+	CLEAR_PRODUCT,
 } from '../actions/types'
 
 const initialState = {
-	pk: '',
 	is_parent: '',
 	parent_id: '',
 	variation_type: '',
@@ -72,6 +72,25 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				photos: action.payload,
+			}
+		}
+		case CLEAR_PRODUCT: {
+			return {
+				is_parent: '',
+				parent_id: '',
+				variation_type: '',
+				variation_text: '',
+				item_type: '',
+				sku: '',
+				sp_id_type: 'UPC',
+				sp_id_value: '',
+				price: '0.00',
+				quantity: 0,
+				battery: 'N',
+				dangerous: 'NA',
+				description: {},
+				dimensions: {},
+				photos: [],
 			}
 		}
 		default:

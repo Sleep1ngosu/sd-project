@@ -16,9 +16,7 @@ const InputBlock = (props) => {
 
 	return (
 		<div style={style} className="newProduct__field__formInput">
-			<span className="newProduct__field__formInput__label">
-				{props.label}
-			</span>
+			<span className="newProduct__field__formInput__label">{props.label}</span>
 			<Input
 				width={props.inputWidth}
 				max={props.max}

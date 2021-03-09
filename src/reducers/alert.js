@@ -1,4 +1,9 @@
-import { ERROR_ALERT, SUCCESS_ALERT, CLEAR_ALERT } from '../actions/types'
+import {
+	ERROR_ALERT,
+	SUCCESS_ALERT,
+	CLEAR_ALERT,
+	LOADING_ALERT,
+} from '../actions/types'
 
 const initialState = {
 	type: '',
@@ -18,6 +23,13 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				type: 'success',
+				message: action.payload,
+			}
+		}
+		case LOADING_ALERT: {
+			return {
+				...state,
+				type: 'loading',
 				message: action.payload,
 			}
 		}

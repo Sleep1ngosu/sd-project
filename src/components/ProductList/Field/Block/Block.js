@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import './Block.scss'
-import ActiveRadioIcon from '../../../../assets/icons/ActiveRadioIcon.png'
-import RadioIcon from '../../../../assets/icons/RadioIcon.png'
-import MenuIcon from '../../../../assets/icons/MenuIcon.png'
+import { connect } from 'react-redux'
 import RightArrowIcon from '../../../../assets/icons/RightArrowIcon.png'
 import DownArrowIcon from '../../../../assets/icons/DownArrowIcon.png'
 import Settings from '../Settings/Settings'
-import Iconlist from '../../../../assets/icons/Iconlist.png'
 import {
 	productListBlockSetup,
 	createListingBlockSetup,
 	checkListingBlockSetup,
 } from '../../../../helpers/Field/Block/blockSetups'
+import { addProductToListing } from '../../../../actions/listing'
+import { openPhotos } from '../../../../actions/photos'
+import { setBlocker } from '../../../../actions/blocker'
 
 /**
  *
@@ -21,8 +21,8 @@ import {
 const Block = (props) => {
 	let style, styleTextBlock, settingsStyle
 	if (props.index % 2 === 0) {
-		style = { backgroundColor: '#f2f2f2' }
-	} else style = { backgroundColor: 'white' }
+		style = { backgroundColor: 'white' }
+	} else style = { backgroundColor: '#f2f2f2' }
 
 	let [isExpanded, setExpanded] = useState(false)
 
@@ -36,16 +36,12 @@ const Block = (props) => {
 		downArrowIconStyle = { display: 'none' }
 	}
 
-	if (isExpanded) {
+	if (isExpanded || props.isChildren) {
 		style = { ...style, height: 'auto', minHeight: '13rem' }
 		styleTextBlock = { maxHeight: '100rem', fontWeight: 'bold' }
 	} else {
 		style = { ...style, height: '13rem' }
 		styleTextBlock = { maxHeight: '12rem' }
-	}
-
-	const onClickExpand = () => {
-		setExpanded(!isExpanded)
 	}
 
 	if (!props.title) {
@@ -60,34 +56,73 @@ const Block = (props) => {
 		settingsStyle = { display: 'none' }
 	}
 
+	const onClickExpand = () => {
+		props.setExpanded(props.id)
+		setExpanded(!isExpanded)
+		props.setRefresh(!props.refresh)
+	}
+
+	const openPhotos = () => {
+		if (props.product.photos.length) {
+			props.openPhotos(props.product.photos)
+			props.setBlocker()
+		}
+	}
+
+	const addToListing = () => {
+		props.addProductToListing(props.sku)
+	}
+
 	let setup = {}
 	// let styleDate, styleWrapper, renderedIcon
 
 	if (props.type === 'product_list') {
 		setup = productListBlockSetup(props, settingsIconStyle)
 	} else if (props.type === 'create_listing') {
-		setup = createListingBlockSetup()
+		setup = createListingBlockSetup(addToListing)
 	} else if (props.type === 'check_listing') {
 		setup = checkListingBlockSetup(props, settingsIconStyle)
 	}
 
 	style = { ...setup.styleWrapper, ...style }
 
+	const startedPhoto =
+		(props.product.photos.length && props.product.photos[0].image) || null
+
+	if (props.isChildren && props.expandedIndex.indexOf(props.parent) === -1) {
+		style = { ...style, display: 'none' }
+	}
+
+	let isChildrens
+	if (props.isChildren || props.childs.length === 0) {
+		isChildrens = false
+	} else isChildrens = true
+
 	return (
 		<div style={style} className="productList__field__block__wrapper">
-			<div className="productList__field__block__image"></div>
-			{/** PICTURES */}
+			<div onClick={openPhotos} className="productList__field__block__image">
+				<img
+					style={(startedPhoto && { display: 'flex' }) || { display: 'none' }}
+					className="image"
+					src={startedPhoto}
+					alt="image"
+					// onClick={openPhotos}
+				/>
+			</div>
 			<div
 				style={styleTextBlock}
 				className="productList__field__block__sku block__element "
+				title={props.sku}
 			>
-				<div
-					style={rightArrowIconStyle}
-					className="productList__field__block__moreIcon"
-					onClick={onClickExpand}
-				>
-					<img src={RightArrowIcon} alt="right arrow icon" />
-				</div>
+				{isChildrens ? (
+					<div
+						style={rightArrowIconStyle}
+						className="productList__field__block__moreIcon"
+						onClick={onClickExpand}
+					>
+						<img src={RightArrowIcon} alt="right arrow icon" />
+					</div>
+				) : null}
 				<div
 					style={downArrowIconStyle}
 					className="productList__field__block__moreIcon"
@@ -100,10 +135,11 @@ const Block = (props) => {
 			<div
 				style={styleTextBlock}
 				className="productList__field__block__title block__element "
+				title={props.title}
 			>
 				{props.title}
 			</div>
-			<div
+			{/* <div
 				style={setup.styleDate}
 				className="productList__field__block__createDate block__element "
 			>
@@ -114,13 +150,30 @@ const Block = (props) => {
 				className="productList__field__block__launchDate block__element "
 			>
 				{props.launchDate}
-			</div>
+			</div> */}
 			<div className="productList__field__block__settings">
 				{setup.renderedIcon}
-				<Settings type={props.type} style={settingsStyle} />
+				<Settings
+					sku={props.sku}
+					type={props.type}
+					style={settingsStyle}
+					settingsToggle={props.settingsToggle}
+					index={props.index}
+					product={props.product}
+				/>
 			</div>
 		</div>
 	)
 }
 
-export default Block
+const mapStateToProps = (state) => {
+	return {
+		photos: state.photos,
+	}
+}
+
+export default connect(mapStateToProps, {
+	addProductToListing,
+	openPhotos,
+	setBlocker,
+})(Block)

@@ -21,7 +21,6 @@ const InputBlockSelect = (props) => {
 
 	const onChange = (e) => {
 		props.onChange(e)
-		console.log(e.target.name)
 	}
 
 	let renderedInput

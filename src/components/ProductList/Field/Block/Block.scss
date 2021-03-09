@@ -17,11 +17,12 @@
 .block__element {
 	display: flex;
 	align-items: flex-start;
-	flex-wrap: nowrap;
+	flex-wrap: wrap;
 	padding-left: 1rem;
 	padding-right: 1rem;
 	padding-top: 1rem;
-	max-width: 20.75rem;
+	// max-width: 20.75rem;
+	max-width: 38rem;
 	overflow: hidden;
 	max-height: 12rem;
 
@@ -81,8 +82,15 @@
 
 	&__image {
 		display: grid;
-		justify-content: center;
+		// justify-content: center;
 		align-items: center;
+		position: relative;
+
+		.image {
+			width: 16rem;
+			height: 13rem;
+			cursor: pointer;
+		}
 	}
 
 	&__sku {

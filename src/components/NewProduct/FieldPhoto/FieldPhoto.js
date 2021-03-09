@@ -1,28 +1,31 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import './FieldPhoto.scss'
-import InputBlock from '../InputBlock/InputBlock'
-import InputBlockSelect from '../InputBlockSelect/InputBlockSelect'
-import arrays from '../../../variables/arrays'
-import AddPhotoIcon from '../../../assets/icons/AddPhotoIcon.png'
 import Button from '../FieldMain/Button/Button'
 import AddImage from './AddImage/AddImage'
 import { setPhotos } from '../../../actions/product'
+import Alert from '../../Alert/Alert'
+
+import uuid from 'react-uuid'
 
 const FieldPhoto = (props) => {
 	let formStyle = {
 		height: props.height,
 		paddingTop: props.paddingTop,
 	}
-	let [counter, setCounter] = useState(1)
-	let [array, setArray] = useState([counter])
-	let [data, setData] = useState([
-		{
-			id: 1,
-			photo_type: '',
-			photo_path: '',
-		},
-	])
+	let [data, setData] = useState(
+		props.photos.length
+			? props.photos
+			: [
+					{
+						id_key: 1,
+						image_type: 'Main',
+						image: '',
+						id_client: uuid(),
+					},
+			  ]
+	)
+	let counter = data.length
 	let [activePhotoAdd, setActivePhotoAdd] = useState(undefined)
 
 	let ButtonStyle = {
@@ -32,10 +35,10 @@ const FieldPhoto = (props) => {
 		width: '14rem',
 	}
 
-	const onChange = (e, i) => {
+	const onChange = (e, id) => {
 		let arr = []
-		data.forEach((obj, index) => {
-			if (i === index) {
+		data.forEach((obj) => {
+			if (id === obj.id_client) {
 				arr.push({ ...obj, [e.target.name]: e.target.value })
 			} else {
 				arr.push({ ...obj })
@@ -46,22 +49,42 @@ const FieldPhoto = (props) => {
 
 	const onClickAdd = (e) => {
 		e.preventDefault()
-		let arr = array
-		arr.push(counter + 1)
-		setArray(arr)
-		setCounter(counter + 1)
-		let copyArr = data
-		copyArr.push({ id: counter + 1, photo_type: '', photo_path: '' })
-		setData(copyArr)
+		let newArray = []
+		data.forEach((object) => newArray.push(object))
+		newArray.push({
+			id_key: counter + 1,
+			image_type: 'Main',
+			image: '',
+			id_client: uuid(),
+		})
+		setData(newArray)
 	}
 
-	const onClickPhotoAdd = (e, i) => {
+	const onClickPhotoAdd = (e, id) => {
 		e.preventDefault()
-		setActivePhotoAdd(i)
+		setActivePhotoAdd(id)
 	}
 
 	const onClosePhotoAdd = (e) => {
 		e.preventDefault()
+		setActivePhotoAdd(undefined)
+	}
+
+	const onChangeFile = (e) => {
+		const newData = [...data]
+		let file = e.target.files[0]
+		if (file) {
+			let reader = new FileReader()
+			reader.onloadend = () => {
+				newData.forEach((object, index) => {
+					if (object.id_client === e.target.id) {
+						newData[index].image = reader.result.split(',')[1]
+						setData([...newData])
+					}
+				})
+			}
+			reader.readAsDataURL(file)
+		}
 		setActivePhotoAdd(undefined)
 	}
 
@@ -70,18 +93,30 @@ const FieldPhoto = (props) => {
 		props.setPhotos(data)
 	}
 
-	let addPhotoList = array.map((e) => {
+	const onRemove = (_, id) => {
+		if (data.length > 1) {
+			const newArray = data.filter((object) => object.id_client !== id)
+			setData(newArray)
+		}
+	}
+
+	let addPhotoList = data.map((e) => {
 		return (
 			<AddImage
+				id={e.id_client}
 				onChange={(e, i) => onChange(e, i)}
-				photoTypeName={`photo_type`}
+				photoTypeName={`image_type`}
 				photoPathName={`photo_path`}
-				value={data[e - 1]}
-				index={e - 1}
-				key={`fieldPhoto__addImage__${e - 1}`}
+				value={e}
+				index={e.id_key - 1}
+				key={`fieldPhoto__addImage__${e.id_client}`}
 				active={activePhotoAdd}
 				onClick={(e, i) => onClickPhotoAdd(e, i)}
 				onClose={(e) => onClosePhotoAdd(e)}
+				onRemove={onRemove}
+				id_client={e.id_client}
+				onChangeFile={(e) => onChangeFile(e)}
+				image={e}
 			/>
 		)
 	})
@@ -102,8 +137,21 @@ const FieldPhoto = (props) => {
 				/>
 				<Button type="submit" style={ButtonStyle} text="Сохранить" />
 			</div>
+			<Alert
+				style={{
+					left: '50%',
+					transform: 'translateX(-50%)',
+					bottom: '2rem',
+				}}
+			/>
 		</form>
 	)
 }
 
-export default connect(null, { setPhotos })(FieldPhoto)
+const mapStateToProps = (state) => {
+	return {
+		photos: state.editingProduct.editingProduct.photos,
+	}
+}
+
+export default connect(mapStateToProps, { setPhotos })(FieldPhoto)

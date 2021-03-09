@@ -2,6 +2,7 @@ export const SET_MAIN = 'SET_MAIN'
 export const SET_DESCRIPTION = 'SET_DESCRIPTION'
 export const SET_PHOTOS = 'SET_PHOTOS'
 export const SET_SIZES = 'SET_SIZES'
+export const CLEAR_PRODUCT = 'CLEAR_PRODUCT'
 
 //blocker
 export const SET_BLOCKER = 'SET_BLOCKER'
@@ -11,8 +12,28 @@ export const REMOVE_BLOCKER = 'REMOVE_BLOCKER'
 export const ERROR_ALERT = 'ERROR_ALERT'
 export const SUCCESS_ALERT = 'SUCCESS_ALERT'
 export const CLEAR_ALERT = 'CLEAR_ALERT'
+export const LOADING_ALERT = 'LOADING_ALERT'
 
 //itemtype
 export const TOGGLE_ITEMTYPE = 'TOGGLE_ITEMTYPE'
 export const SET_ID = 'SET_ID'
 export const SET_SEARCH = 'SET_SEARCH'
+
+//listing
+export const ADD_PRODUCT_TO_LISTING = 'ADD_PRODUCT_TO_LISTING'
+export const REMOVE_PRODUCT_FROM_LISTING = 'REMOVE_PRODUCT_FROM_LISTING'
+export const CLEAR_LISTING = 'CLEAR_LISTING'
+export const SET_RESPONSE_TYPE = 'SET_RESPONSE_TYPE'
+export const CLEAR_RESPONSE_TYPE = 'CLEAR_RESPONSE_TYPE'
+export const SET_LISTING_SETTINGS = 'SET_LISTING_SETTINGS'
+export const SET_SELLERNAME = 'SET_SELLERNAME'
+export const SET_MARKETPLACE = 'SET_MARKETPLACE'
+
+//editing product
+export const SET_EDITING = 'SET_EDITING'
+export const CLEAR_EDITING = 'CLEAR_EDITING'
+export const TOGGLE_EDITING = 'TOGGLE_EDITING'
+
+//photos
+export const OPEN_PHOTOS = 'OPEN_PHOTOS'
+export const CLOSE_PHOTOS = 'CLOSE_PHOTOS'

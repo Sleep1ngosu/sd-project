@@ -37,9 +37,10 @@ const arrays = {
 				'Bullet 4',
 				'Bullet 5',
 				'Manufacturer',
+				'Search terms',
 			],
-			height: ['5', '5', '20', '13', '13', '13', '13', '5'],
-			max: ['200', '50', '2000', '300', '300', '300', '300', '300', '50'],
+			height: ['5', '5', '20', '13', '13', '13', '13', '13', '5', '10'],
+			max: [200, 50, 2000, 999, 999, 999, 999, 999, 50, 249],
 			names: [
 				'title',
 				'brand',
@@ -50,6 +51,7 @@ const arrays = {
 				'bullet_4',
 				'bullet_5',
 				'manufacturer',
+				'search_terms',
 			],
 		},
 		photoField: {
@@ -108,7 +110,7 @@ const arrays = {
 	},
 	productList: {
 		header: {
-			values: ['SKU', 'Title', 'Create date', 'Launch date'],
+			values: ['SKU', 'Title'],
 		},
 	},
 	createListing: {
