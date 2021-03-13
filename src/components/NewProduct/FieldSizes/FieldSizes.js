@@ -5,21 +5,56 @@ import arrays from '../../../variables/arrays'
 import InputBlock from '../InputBlock/InputBlock'
 import InputBlockSelect from '../InputBlockSelect/InputBlockSelect'
 import Button from '../FieldMain/Button/Button'
-import { setSizes } from '../../../actions/product'
+import { setSizes, setSizesAndCreate } from '../../../actions/product'
 import Alert from '../../Alert/Alert'
+import { editItem } from '../../../actions/editingProduct'
 
 const FieldSizes = (props) => {
 	let [data, setData] = useState({
-		item_weight: props.dimensions.item_weight || undefined,
-		item_weight_mu: props.dimensions.item_weight_mu || 'LB',
-		package_weight: props.dimensions.package_weight || undefined,
-		package_weight_mu: props.dimensions.package_weight_mu || 'LB',
-		package_width: props.dimensions.package_width || undefined,
-		package_width_mu: props.dimensions.package_width_mu || 'FT',
-		package_length: props.dimensions.package_length || undefined,
-		package_length_mu: props.dimensions.package_length_mu || 'FT',
-		package_height: props.dimensions.package_height || undefined,
-		package_height_mu: props.dimensions.package_height_mu || 'FT',
+		item_weight:
+			props.dimensions.item_weight ||
+			props.data.dimensions.item_weight ||
+			undefined,
+		item_weight_mu:
+			props.dimensions.item_weight_mu ||
+			props.data.dimensions.item_weight_mu ||
+			'LB',
+
+		package_weight:
+			props.dimensions.package_weight ||
+			props.data.dimensions.package_weight ||
+			undefined,
+		package_weight_mu:
+			props.dimensions.package_weight_mu ||
+			props.data.dimensions.package_weight_mu ||
+			'LB',
+
+		package_width:
+			props.dimensions.package_width ||
+			props.data.dimensions.package_width ||
+			undefined,
+		package_width_mu:
+			props.dimensions.package_width_mu ||
+			props.data.dimensions.package_width_mu ||
+			'FT',
+
+		package_length:
+			props.dimensions.package_length ||
+			props.data.dimensions.package_length ||
+			undefined,
+		package_length_mu:
+			props.dimensions.package_length_mu ||
+			props.data.dimensions.package_length_mu ||
+			'FT',
+
+		package_height:
+			props.dimensions.package_height ||
+			props.data.dimensions.package_height ||
+			undefined,
+		package_height_mu:
+			props.dimensions.package_height_mu ||
+			props.data.package_height_mu ||
+			'FT',
 	})
 
 	console.log(props.dimensions)
@@ -41,9 +76,25 @@ const FieldSizes = (props) => {
 		)
 	})
 
-	const onSubmit = (e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault()
+		const newData = {
+			...props.data,
+			description: props.data.description,
+			photos: props.data.photos,
+			dimensions: data,
+		}
+
+		if (props.mode === 'Creating') {
+			await props.setSizesAndCreate(newData, props.id, props.products)
+		} else if (props.mode === 'Editing') {
+			await editItem(props.editingProduct, newData)
+		}
+	}
+
+	const onClickNextButton = () => {
 		props.setSizes(data)
+		props.onClickToStart()
 	}
 
 	const inputSelectList = arrays.newProductMain.sizesField.types.map((e, i) => {
@@ -83,8 +134,14 @@ const FieldSizes = (props) => {
 					{inputSelectList}
 				</div>
 			</div>
-			<div className="newProduct__sizes__footer">
+			<div className="newProduct__sizes__buttons">
 				<Button type="submit" text="Сохранить" style={styleButton} />
+				<Button
+					type="button"
+					text="To start"
+					style={styleButton}
+					onClick={onClickNextButton}
+				/>
 			</div>
 			<Alert
 				style={{
@@ -99,7 +156,13 @@ const FieldSizes = (props) => {
 const mapStateToProps = (state) => {
 	return {
 		dimensions: state.editingProduct.editingProduct.dimensions,
+		products: state.productsList,
+		id: state.itemType.id,
+		data: state.product,
+		editingProduct: state.editingProduct.editingProduct,
 	}
 }
 
-export default connect(mapStateToProps, { setSizes })(FieldSizes)
+export default connect(mapStateToProps, { setSizes, setSizesAndCreate })(
+	FieldSizes
+)

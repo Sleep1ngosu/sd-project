@@ -1,4 +1,9 @@
-import { TOGGLE_ITEMTYPE, SET_ID, SET_SEARCH } from '../actions/types'
+import {
+	TOGGLE_ITEMTYPE,
+	SET_ID,
+	SET_SEARCH,
+	CLEAR_ITEMTYPE,
+} from '../actions/types'
 
 const initialState = {
 	isShow: false,
@@ -6,7 +11,7 @@ const initialState = {
 	id: '',
 }
 
-export default (state = initialState, action) => {
+const ItemTypeReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case TOGGLE_ITEMTYPE: {
 			return {
@@ -26,7 +31,16 @@ export default (state = initialState, action) => {
 				search: action.payload,
 			}
 		}
+		case CLEAR_ITEMTYPE: {
+			return {
+				...state,
+				search: '',
+				id: '',
+			}
+		}
 		default:
 			return state
 	}
 }
+
+export default ItemTypeReducer

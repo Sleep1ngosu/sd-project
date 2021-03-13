@@ -1,5 +1,7 @@
 import axios from '../utils/axios'
 import { clearProduct } from './product'
+import { setPrevProduct } from './prevProduct'
+import { clearItemType } from './itemType'
 import {
 	setSuccessAlert,
 	setErrorAlert,
@@ -10,7 +12,7 @@ export const createProduct = (requestData, itemType, products) => async (
 	dispatch
 ) => {
 	try {
-		dispatch(setLoadingAlert('loading...'))
+		await dispatch(setLoadingAlert('loading...'))
 		const URI = '/products/new_product'
 		const data = {
 			...requestData,
@@ -23,7 +25,7 @@ export const createProduct = (requestData, itemType, products) => async (
 			photos: [...requestData.photos],
 			item_type: itemType,
 		}
-		if (data.parent_id) {
+		if (data.parent_id && typeof data.parent_id !== 'number') {
 			const currentProduct = products.filter(
 				(product) => product.sku === data.parent_id
 			)
@@ -34,7 +36,9 @@ export const createProduct = (requestData, itemType, products) => async (
 		}
 		const response = await axios.post(URI, data)
 		console.log(response)
+		dispatch(setPrevProduct(data))
 		dispatch(clearProduct())
+		dispatch(clearItemType())
 		dispatch(setSuccessAlert('Successfully created!'))
 	} catch (err) {
 		console.log(err.response)

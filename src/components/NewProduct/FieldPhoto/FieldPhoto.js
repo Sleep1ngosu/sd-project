@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import './FieldPhoto.scss'
 import Button from '../FieldMain/Button/Button'
 import AddImage from './AddImage/AddImage'
-import { setPhotos } from '../../../actions/product'
+import { setPhotos, setPhotosAndCreate } from '../../../actions/product'
 import Alert from '../../Alert/Alert'
+import { editItem } from '../../../actions/editingProduct'
 
 import uuid from 'react-uuid'
 
@@ -13,18 +14,24 @@ const FieldPhoto = (props) => {
 		height: props.height,
 		paddingTop: props.paddingTop,
 	}
-	let [data, setData] = useState(
-		props.photos.length
-			? props.photos
-			: [
-					{
-						id_key: 1,
-						image_type: 'Main',
-						image: '',
-						id_client: uuid(),
-					},
-			  ]
-	)
+	let usedPhotos
+	if (props.data.photos.length) {
+		usedPhotos = props.data.photos
+	}
+	if (props.photos.length) {
+		usedPhotos = props.photos
+	}
+	if (!usedPhotos) {
+		usedPhotos = [
+			{
+				id_key: 1,
+				image_type: 'Main',
+				image: '',
+				id_client: uuid(),
+			},
+		]
+	}
+	let [data, setData] = useState(usedPhotos)
 	let counter = data.length
 	let [activePhotoAdd, setActivePhotoAdd] = useState(undefined)
 
@@ -88,9 +95,24 @@ const FieldPhoto = (props) => {
 		setActivePhotoAdd(undefined)
 	}
 
-	const onSubmit = (e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault()
+		const newData = {
+			...props.data,
+			description: props.data.description,
+			dimensions: props.data.dimensions,
+			photos: data,
+		}
+		if (props.mode === 'Creating') {
+			await props.setPhotosAndCreate(newData, props.id, props.products)
+		} else if (props.mode === 'Editing') {
+			await editItem(props.editingProduct, newData)
+		}
+	}
+
+	const onClickNextButton = () => {
 		props.setPhotos(data)
+		props.onClickNextField()
 	}
 
 	const onRemove = (_, id) => {
@@ -136,6 +158,12 @@ const FieldPhoto = (props) => {
 					text="Добавить"
 				/>
 				<Button type="submit" style={ButtonStyle} text="Сохранить" />
+				<Button
+					type="button"
+					style={ButtonStyle}
+					text="Next"
+					onClick={onClickNextButton}
+				/>
 			</div>
 			<Alert
 				style={{
@@ -151,7 +179,13 @@ const FieldPhoto = (props) => {
 const mapStateToProps = (state) => {
 	return {
 		photos: state.editingProduct.editingProduct.photos,
+		data: state.product,
+		id: state.itemType.id,
+		products: state.productsList,
+		editingProduct: state.editingProduct.editingProduct,
 	}
 }
 
-export default connect(mapStateToProps, { setPhotos })(FieldPhoto)
+export default connect(mapStateToProps, { setPhotos, setPhotosAndCreate })(
+	FieldPhoto
+)

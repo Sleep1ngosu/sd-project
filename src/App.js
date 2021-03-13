@@ -9,53 +9,74 @@ import ProductList from './components/ProductList/ProductList'
 import CreateListing from './components/CreateListing/CreateListing'
 import LookPhoto from './components/ProductList/LookPhoto/LookPhoto'
 import Blocker from './components/Blocker/Blocker'
+import { Signin } from './components/Authorization/Signin/Signin'
+import { setProductsList } from './actions/productsList'
+import store from './store'
 
 const App = () => {
+	store.dispatch(setProductsList())
+
 	return (
 		<Router>
-			<div className="App__wrapper">
-				<header className="App__header">
-					<div className="App__header__logo">
-						<img src={Logo} alt="logo" />
-					</div>
-					<div className="App__header__sitename">
-						<img src={SiteNameEn} alt="site-name-en" />
-					</div>
-					<div className="App__header__contacts">
-						<span className="App__header__contacts__text">
-							phone, viber, whatsapp: +7 904 870 43 27
-						</span>
-						<span className="App__header__contacts__text">
-							email: piskun.victor@gmail.com
-						</span>
-					</div>
-				</header>
-				<main className="App__body">
-					<Blocker />
-					<LookPhoto />
-					<Switch>
-						<Route path="/" component={Main} exact />
-						<Route path="/products/new_product" component={NewProduct} exact />
-						<Route path="/products" component={ProductList} exact />
-						<Route
-							path="/listing/listing_products"
-							component={CreateListing}
-							exact
-						/>
-					</Switch>
-				</main>
-				<footer className="App__footer">
-					<div className="App__footer__contacts">
-						<span className="App__footer__contacts__title">Контакты</span>
-						<span className="App__footer__contacts__text">
-							email: piskun.victor@gmail.com
-						</span>
-						<span className="App__footer__contacts__text">
-							phone, viber, whatsapp: +7 904 870 43 27
-						</span>
-					</div>
-				</footer>
-			</div>
+			<Switch>
+				<Route path="/authorization" component={Signin} />
+				<Route
+					path="/"
+					render={() => {
+						return (
+							<div className="App__wrapper">
+								<header className="App__header">
+									<div className="App__header__logo">
+										<img src={Logo} alt="logo" />
+									</div>
+									<div className="App__header__sitename">
+										<img src={SiteNameEn} alt="site-name-en" />
+									</div>
+									<div className="App__header__contacts">
+										<span className="App__header__contacts__text">
+											phone, viber, whatsapp: +7 904 870 43 27
+										</span>
+										<span className="App__header__contacts__text">
+											email: piskun.victor@gmail.com
+										</span>
+									</div>
+								</header>
+								<main className="App__body">
+									<Blocker />
+									<LookPhoto />
+									<Switch>
+										<Route path="/" component={Main} exact />
+										<Route
+											path="/products/new_product"
+											component={NewProduct}
+											exact
+										/>
+										<Route path="/products" component={ProductList} exact />
+										<Route
+											path="/listing/listing_products"
+											component={CreateListing}
+											exact
+										/>
+									</Switch>
+								</main>
+								<footer className="App__footer">
+									<div className="App__footer__contacts">
+										<span className="App__footer__contacts__title">
+											Контакты
+										</span>
+										<span className="App__footer__contacts__text">
+											email: piskun.victor@gmail.com
+										</span>
+										<span className="App__footer__contacts__text">
+											phone, viber, whatsapp: +7 904 870 43 27
+										</span>
+									</div>
+								</footer>
+							</div>
+						)
+					}}
+				/>
+			</Switch>
 		</Router>
 	)
 }

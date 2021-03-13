@@ -20,12 +20,12 @@ const ListingSettings = ({
 		sellers = []
 
 	options.markets.forEach((array) => {
-		markets.push(array[0])
+		markets.push(array[1])
 	})
 
 	options.sellers.forEach((array) => {
 		if (array[0]) {
-			sellers.push(array[0])
+			sellers.push(array[1])
 		}
 	})
 

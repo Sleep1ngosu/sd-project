@@ -9,7 +9,7 @@ const initialState = {
 	},
 }
 
-export default (state = initialState, action) => {
+const EditingProductReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case SET_EDITING: {
 			return {
@@ -39,3 +39,5 @@ export default (state = initialState, action) => {
 			return state
 	}
 }
+
+export default EditingProductReducer

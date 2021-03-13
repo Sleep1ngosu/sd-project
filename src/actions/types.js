@@ -18,6 +18,7 @@ export const LOADING_ALERT = 'LOADING_ALERT'
 export const TOGGLE_ITEMTYPE = 'TOGGLE_ITEMTYPE'
 export const SET_ID = 'SET_ID'
 export const SET_SEARCH = 'SET_SEARCH'
+export const CLEAR_ITEMTYPE = 'CLEAR_ITEMTYPE'
 
 //listing
 export const ADD_PRODUCT_TO_LISTING = 'ADD_PRODUCT_TO_LISTING'
@@ -37,3 +38,9 @@ export const TOGGLE_EDITING = 'TOGGLE_EDITING'
 //photos
 export const OPEN_PHOTOS = 'OPEN_PHOTOS'
 export const CLOSE_PHOTOS = 'CLOSE_PHOTOS'
+
+//prev product
+export const SET_PREV_PRODUCT = 'SET_PREV_PRODUCT'
+
+//productsList
+export const SET_PRODUCTS_LIST = 'SET_PRODUCTS_LIST'

@@ -11,27 +11,62 @@ import InputBlockSelect from '../InputBlockSelect/InputBlockSelect'
 import CreateDate from './CreateDate/CreateDate'
 import LaunchDate from './LaunchDate/LaunchDate'
 import VariationText from './VariationText/VariationText'
-import { setMain } from '../../../actions/product'
+import { clearItemType, setId } from '../../../actions/itemType'
+import {
+	setMain,
+	setMainAndCreate,
+	setDescription,
+	setSizes,
+	setPhotos,
+} from '../../../actions/product'
 import { createProduct } from '../../../actions/createProduct'
 import { getItems } from '../../../api/getItems'
-import { editItem } from '../../../api/editItem'
+import { editItem } from '../../../actions/editingProduct'
 import Alert from '../../Alert/Alert'
 import { toggleEditing, clearEditing } from '../../../actions/editingProduct'
+import { findProductId } from '../../../helpers/findProductId'
+import { setErrorAlert } from '../../../actions/alert'
 
 const Main = (props) => {
+	const initialData = {
+		is_parent: '',
+		parent_id: '',
+		variation_type: '',
+		variation_text: '',
+		item_type: '',
+		sku: '',
+		sp_id_type: 'UPC',
+		sp_id_value: '',
+		price: '0.00',
+		quantity: 0,
+		battery: 'N',
+		dangerous: 'NA',
+	}
+
 	let [data, setData] = useState({
-		is_parent: props.editingProduct.is_parent || false,
-		parent_id: props.editingProduct.parent_id || '',
-		variation_type: props.editingProduct.variation_type || 'Size',
-		variation_text: props.editingProduct.variation_text || undefined,
-		item_type: props.editingProduct.item_type || '',
-		sku: props.editingProduct.sku || '',
-		sp_id_type: props.editingProduct.sp_id_type || 'UPC',
-		sp_id_value: props.editingProduct.sp_id_value || undefined,
-		price: props.editingProduct.price || '0.00',
-		quantity: props.editingProduct.quantity || 0,
-		battery: props.editingProduct.battery || 'NO',
-		dangerous: props.editingProduct.dangerous || 'Not Applicable',
+		is_parent: props.editingProduct.is_parent || props.data.is_parent || false,
+		parent_id: props.editingProduct.parent_id || props.data.parent_id || '',
+		variation_type:
+			props.editingProduct.variation_type ||
+			props.data.variation_type ||
+			'Size',
+		variation_text:
+			props.editingProduct.variation_text ||
+			props.data.variation_text ||
+			undefined,
+		item_type: props.editingProduct.item_type || props.data.item_type || '',
+		sku: props.editingProduct.sku || props.data.sku || '',
+		sp_id_type:
+			props.editingProduct.sp_id_type || props.data.sp_id_type || 'UPC',
+		sp_id_value:
+			props.editingProduct.sp_id_value || props.data.sp_id_value || undefined,
+		price: props.editingProduct.price || props.data.price || '0.00',
+		quantity: props.editingProduct.quantity || props.data.quantity || 0,
+		battery: props.editingProduct.battery || props.data.battery || 'NO',
+		dangerous:
+			props.editingProduct.dangerous ||
+			props.data.dangerous ||
+			'Not Applicable',
 	})
 
 	let [products, setProducts] = useState([])
@@ -69,18 +104,25 @@ const Main = (props) => {
 		fetch()
 	}, [])
 
-	let MainLeftButtonStyle = {
+	let saveButtonStyle = {
 		backgroundColor: '#FFBA0A',
 		border: '.1rem solid #EDB014',
 		color: 'white',
 		width: '14rem',
 	}
 
-	let MainRightButtonStyle = {
+	let variationButtonStyle = {
 		border: '.3rem solid #FFBA0A',
 		color: '#FFBA0A',
 		width: '20rem',
 		backgroundColor: 'white',
+	}
+
+	let nextButtonStyle = {
+		backgroundColor: '#FFBA0A',
+		border: '.1rem solid #EDB014',
+		color: 'white',
+		width: '14rem',
 	}
 
 	let formStyle = {
@@ -88,18 +130,65 @@ const Main = (props) => {
 		paddingTop: props.paddingTop,
 	}
 
-	const onSubmit = (e) => {
+	const onSubmit = async (e, mode) => {
 		e.preventDefault()
-		console.log(data)
-		props.setMain(data)
+		const newData = {
+			...data,
+			description: props.data.description,
+			dimensions: props.data.dimensions,
+			photos: props.data.photos,
+		}
+		if (props.mode === 'Creating') {
+			await props.setMainAndCreate(newData, props.id, products)
+		} else if (props.mode === 'Editing') {
+			await editItem(props.editingProduct, newData)
+		}
+		props.clearItemType()
+		setData(initialData)
 	}
 
-	const onCreate = async (mode) => {
-		if (mode === 'Creating') {
-			await props.createProduct(props.data, props.id, products)
-		} else if (mode === 'Editing') {
-			await editItem(props.editingProduct, props.data)
+	const onCreateVariation = () => {
+		if (props.prev.is_parent) {
+			const id = findProductId(products, props.prev.sku)
+			const main = {
+				...props.prev,
+				is_parent: false,
+				parent_id: id,
+			}
+			delete main.description
+			delete main.photos
+			delete main.dimensions
+			const description = { ...props.prev.description }
+			const dimensions = { ...props.prev.dimensions }
+			const photos = [...props.prev.photos]
+			setData({
+				is_parent: main.is_parent,
+				parent_id: main.parent_id,
+				variation_type: main.variation_type,
+				variation_text: main.variation_text,
+				item_type: main.item_type,
+				sku: main.sku,
+				sp_id_type: main.sp_id_type,
+				sp_id_value: main.sp_id_value,
+				price: main.price,
+				quantity: main.quantity,
+				battery: main.battery,
+				dangerous: main.dangerous,
+			})
+
+			props.setId(main.item_type)
+			props.setMain(main)
+			props.setDescription(description)
+			props.setSizes(dimensions)
+			props.setPhotos(photos)
+		} else {
+			props.setErrorAlert(`You haven't already created parent product`)
 		}
+	}
+
+	const onClickNextButton = () => {
+		props.setMain(data)
+		props.onClickNextField()
 	}
 
 	const onChange = (e) => {
@@ -114,8 +203,6 @@ const Main = (props) => {
 		setData({ ...data, parent_id: e.target.value })
 	}
 
-	const mode = (props.isEditing && 'Editing') || 'Creating'
-
 	const toggleMode = () => {
 		if (props.isEditing) {
 			props.clearEditing()
@@ -127,12 +214,12 @@ const Main = (props) => {
 	return (
 		<form
 			autoComplete="off"
-			onSubmit={(e) => onSubmit(e)}
+			onSubmit={(e) => onSubmit(e, props.mode)}
 			style={formStyle}
 			className="newProduct__Main"
 		>
 			<div className="newProduct__Main__edit">
-				<div className="newProduct__Main__edit__text">mode: {mode}</div>
+				<div className="newProduct__Main__edit__text">mode: {props.mode}</div>
 				<button
 					onClick={toggleMode}
 					type="button"
@@ -152,7 +239,7 @@ const Main = (props) => {
 			{/**not required */}
 			<ItemType
 				name="item_type"
-				value={props.id}
+				value={data.item_type || props.id}
 				onChange={(e) => onChange(e)}
 			/>
 			{/**required */}
@@ -164,7 +251,7 @@ const Main = (props) => {
 				marginTop="2.6rem"
 				name="sku"
 				value={
-					(mode === 'Editing' &&
+					(props.mode === 'Editing' &&
 						props.editingProduct &&
 						props.editingProduct.sku) ||
 					sku
@@ -172,7 +259,8 @@ const Main = (props) => {
 				onChange={(e) => onChange(e)}
 				required={true}
 				disabled={
-					(mode === 'Editing' && props.editingProduct && 'disabled') || false
+					(props.mode === 'Editing' && props.editingProduct && 'disabled') ||
+					false
 				}
 			/>
 			{/**required */}
@@ -279,12 +367,18 @@ const Main = (props) => {
 			/>
 			{/**required if variation_type is not empty */}
 			<div className="newProduct__Main__buttons">
-				<Button type="submit" style={MainLeftButtonStyle} text="Сохранить" />
+				<Button type="submit" style={saveButtonStyle} text="Сохранить" />
 				<Button
 					type="button"
-					style={MainRightButtonStyle}
+					style={variationButtonStyle}
 					text="Создать вариацию"
-					onClick={() => onCreate(mode)}
+					onClick={() => onCreateVariation(props.mode)}
+				/>
+				<Button
+					type="button"
+					style={nextButtonStyle}
+					text="Next"
+					onClick={onClickNextButton}
 				/>
 			</div>
 			<Alert
@@ -304,12 +398,20 @@ const mapStateToProps = (state) => {
 		id: state.itemType.id,
 		isEditing: state.editingProduct.isEditing,
 		editingProduct: state.editingProduct.editingProduct,
+		prev: state.prevProduct,
 	}
 }
 
 export default connect(mapStateToProps, {
 	setMain,
+	setDescription,
+	setSizes,
+	setPhotos,
 	createProduct,
 	toggleEditing,
 	clearEditing,
+	setMainAndCreate,
+	clearItemType,
+	setErrorAlert,
+	setId,
 })(Main)

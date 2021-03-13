@@ -2,7 +2,7 @@ import { SET_BLOCKER, REMOVE_BLOCKER } from '../actions/types'
 
 const initialState = { isActive: false }
 
-export default (state = initialState, action) => {
+const BlockerReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case SET_BLOCKER: {
 			return {
@@ -20,3 +20,5 @@ export default (state = initialState, action) => {
 			return state
 	}
 }
+
+export default BlockerReducer

@@ -24,7 +24,7 @@ const initialState = {
 	photos: [],
 }
 
-export default (state = initialState, action) => {
+const ProductReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case SET_MAIN:
 			const {
@@ -97,3 +97,5 @@ export default (state = initialState, action) => {
 			return state
 	}
 }
+
+export default ProductReducer

@@ -9,12 +9,13 @@
 	// padding-top: 6.2rem;
 	padding-left: 1.9rem;
 	animation: transit 0.3s ease-out;
+	border-radius: 2rem;
 
 	&__buttons {
 		display: flex;
 		justify-content: space-between;
-		width: 37.7rem;
-		margin-left: 29.2rem;
+		width: 70rem;
+		margin: 0 auto;
 		margin-top: 6.9rem;
 	}
 

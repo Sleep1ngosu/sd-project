@@ -1,4 +1,4 @@
-import { SET_ID, SET_SEARCH, TOGGLE_ITEMTYPE } from './types'
+import { SET_ID, SET_SEARCH, TOGGLE_ITEMTYPE, CLEAR_ITEMTYPE } from './types'
 
 export const setId = (id) => async (dispatch) => {
 	dispatch({ type: SET_ID, payload: id })
@@ -10,4 +10,8 @@ export const setSearch = (search) => async (dispatch) => {
 
 export const toggleItemtype = () => async (dispatch) => {
 	dispatch({ type: TOGGLE_ITEMTYPE })
+}
+
+export const clearItemType = () => async (dispatch) => {
+	dispatch({ type: CLEAR_ITEMTYPE })
 }

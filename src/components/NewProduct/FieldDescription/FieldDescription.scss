@@ -1,0 +1,11 @@
+.description {
+	&__buttons {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin: 0 auto;
+		margin-top: 5rem;
+		width: 50rem;
+		height: 5rem;
+	}
+}

@@ -4,6 +4,7 @@ import NavLinks from '../NewProduct/NavLinks/NavLinks'
 import ListingSettings from './ListingSettings/ListingSettings'
 import NavBody from '../NavBody/NavBody'
 import Field from '../ProductList/Field/Field'
+import ProductsField from './ProductsField/ProductsField'
 
 const CreateListing = () => {
 	let titles = ['Список товаров', 'Просмотр листинга']
@@ -15,7 +16,7 @@ const CreateListing = () => {
 
 	let renderedComponent
 	if (+active === 0) {
-		renderedComponent = <Field type="create_listing" />
+		renderedComponent = <ProductsField type="create_listing" />
 	} else if (+active === 1) {
 		renderedComponent = <Field type="check_listing" />
 	}

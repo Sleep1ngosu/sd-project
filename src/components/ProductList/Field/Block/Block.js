@@ -47,12 +47,6 @@ const Block = (props) => {
 		styleTextBlock = { maxHeight: '12rem' }
 	}
 
-	if (!props.title) {
-		rightArrowIconStyle = { display: 'none' }
-		downArrowIconStyle = { display: 'none' }
-		settingsIconStyle = { display: 'none' }
-	}
-
 	if (props.index === props.active) {
 		settingsStyle = { display: 'block' }
 	} else {
@@ -81,6 +75,9 @@ const Block = (props) => {
 
 	if (props.type === 'product_list') {
 		setup = productListBlockSetup(props, settingsIconStyle)
+		if (props.sku === 'cord lock clamp') {
+			console.log(props)
+		}
 	} else if (props.type === 'create_listing') {
 		setup = createListingBlockSetup(addToListing)
 	} else if (props.type === 'check_listing') {

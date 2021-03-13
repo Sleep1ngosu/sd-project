@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import './Field.scss'
 import { connect } from 'react-redux'
-import Header from './Header/Header'
-import Block from './Block/Block'
+import './ProductListField.scss'
 import { getItems } from '../../../api/getItems'
-import Alert from './Alert/Alert'
-import { setListingSettings, sendListing } from '../../../actions/listing'
+import Block from '../Field/Block/Block'
+import Header from '../Field/Header/Header'
 
-const Field = (props) => {
+const ProductListField = (props) => {
 	let [settingsIndex, setSettingIndex] = useState(undefined)
 	const [products, setProducts] = useState([])
 	const [expandedIndex, setExpandedIndex] = useState([])
 	let [refresh, setRefresh] = useState(false)
-	// const [listingData, setListingData] = useState([])
 
 	useEffect(() => {
 		const fetchProducts = async () => {
@@ -21,11 +18,7 @@ const Field = (props) => {
 				setProducts(response.data)
 			}
 		}
-		const fetchListings = async () => {
-			props.setListingSettings()
-		}
 
-		fetchListings()
 		fetchProducts()
 	}, [])
 
@@ -37,14 +30,7 @@ const Field = (props) => {
 		}
 	}
 
-	let style
-	if (props.type === 'product_list') {
-		style = { marginTop: '5.1rem' }
-	} else if (props.type === 'create_listing') {
-		style = { marginTop: '2.6rem' }
-	} else if (props.type === 'check_listing') {
-		style = { marginTop: '1.6rem' }
-	}
+	let style = { marginTop: '5.1rem' }
 
 	const setExpanded = (id) => {
 		const array = expandedIndex
@@ -118,93 +104,13 @@ const Field = (props) => {
 		})
 	})
 
-	const listingData = []
-
-	products.forEach((product) => {
-		if (props.listingProducts.indexOf(product.sku) !== -1) {
-			listingData.push(product)
-		}
-	})
-
-	const sendListing = () => {
-		// props.sendListing()
-		const ids = []
-		const name = props.listingProducts[0]
-		props.listingProducts.forEach((product_sku) => {
-			products.forEach((product) => {
-				if (product.sku === product_sku) {
-					ids.push(product.id)
-				}
-			})
-		})
-
-		let seller, market
-
-		props.sellers.forEach((array) => {
-			if (array.indexOf(props.sellername) !== -1) {
-				seller = array[0]
-			}
-		})
-
-		props.markets.forEach((array) => {
-			if (array.indexOf(props.marketplace) !== -1) {
-				market = array[0]
-			}
-		})
-
-		const data = {
-			seller: seller,
-			marketplace: market,
-			created_at: null,
-			products: ids,
-			name,
-		}
-		props.sendListing(data)
-	}
-
-	const listingDataList = listingData.map((product, i) => {
-		return (
-			<Block
-				key={`productList__field__${i}`}
-				index={i}
-				title={product.description.title}
-				sku={product.sku}
-				onClickSettings={(i) => settingsToggle(i)}
-				active={settingsIndex}
-				type={props.type}
-				id={product.id}
-				settingsToggle={() => settingsToggle(i)}
-				product={product}
-			/>
-		)
-	})
-
-	const bodyStyle = (props.type === 'check_listing' && {
-		maxHeight: '50rem',
-	}) || { maxHeight: '104rem', height: '100%' }
+	const bodyStyle = { maxHeight: '104rem', height: '100%' }
 
 	return (
 		<div style={style} className="productList__field__wrapper">
 			<Header type={props.type} />
 			<div style={bodyStyle} className="productList__field__body">
-				{props.type !== 'check_listing' ? blocksList : listingDataList}
-			</div>
-			<div
-				style={
-					(props.type === 'check_listing' && { display: 'flex' }) || {
-						display: 'none',
-					}
-				}
-				className="sendListing"
-			>
-				<button
-					onClick={() => sendListing()}
-					type="button"
-					className="sendListing__button"
-				>
-					Отправить
-				</button>
-				<Alert />
+				{blocksList}
 			</div>
 		</div>
 	)
@@ -220,6 +126,4 @@ const mapStateToProps = (state) => {
 	}
 }
 
-export default connect(mapStateToProps, { setListingSettings, sendListing })(
-	Field
-)
+export default connect(mapStateToProps, {})(ProductListField)

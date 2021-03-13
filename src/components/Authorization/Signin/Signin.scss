@@ -1,22 +1,47 @@
 .signin {
+	position: absolute;
 	display: flex;
 	flex-direction: column;
-	width: 60rem;
-	height: 80rem;
-	border: 0.1rem solid black;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 45rem;
+	height: 35rem;
+	border: 0.1rem solid rgb(141, 141, 141);
+	border-radius: 1rem;
 
-	&__title,
+	&__header,
 	&__footer {
 		display: flex;
 		justify-content: center;
+		height: 7rem;
+		font-size: 2rem;
+	}
+
+	&__header {
+		border-bottom: 0.1rem solid rgb(173, 173, 173);
 		align-items: center;
-		height: 10rem;
-		background-color: rgb(199, 0, 0);
+		color: rgb(88, 88, 88);
+		font-weight: bold;
+	}
+
+	&__footer {
+		.submit-btn {
+			width: 80%;
+			height: 4rem;
+			border: none;
+			background-color: #556ee6;
+			font-size: 1.5rem;
+			cursor: pointer;
+			border-radius: 1rem;
+			color: white;
+		}
 	}
 
 	&__inputFields {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-around;
+		flex: 1 1 auto;
 	}
 }

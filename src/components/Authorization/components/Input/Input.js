@@ -4,8 +4,8 @@ import './Input.scss'
 export const Input = (props) => {
 	return (
 		<div className="input__wrapper">
-			<div className="label">{props.label}</div>
 			<input
+				placeholder={props.placeholder}
 				value={props.value}
 				name={props.name}
 				onChange={(e) => props.onChange(e)}

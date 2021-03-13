@@ -5,7 +5,7 @@ const initialState = {
 	photos: [],
 }
 
-export default (state = initialState, action) => {
+const PhotosReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case OPEN_PHOTOS: {
 			return {
@@ -25,3 +25,5 @@ export default (state = initialState, action) => {
 			return state
 	}
 }
+
+export default PhotosReducer

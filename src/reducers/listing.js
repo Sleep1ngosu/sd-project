@@ -17,7 +17,7 @@ const initialState = {
 	marketplace: '',
 }
 
-export default (state = initialState, action) => {
+const ListingReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case ADD_PRODUCT_TO_LISTING: {
 			const isConsists = state.products.indexOf(action.payload)
@@ -78,3 +78,5 @@ export default (state = initialState, action) => {
 			return state
 	}
 }
+
+export default ListingReducer

@@ -10,7 +10,7 @@ const initialState = {
 	message: '',
 }
 
-export default (state = initialState, action) => {
+const AlertReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case ERROR_ALERT: {
 			return {
@@ -44,3 +44,5 @@ export default (state = initialState, action) => {
 			return state
 	}
 }
+
+export default AlertReducer

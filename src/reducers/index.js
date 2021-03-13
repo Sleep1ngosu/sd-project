@@ -6,6 +6,8 @@ import itemType from './itemType'
 import listing from './listing'
 import editingProduct from './editingProduct'
 import photos from './photos'
+import prevProduct from './prevProduct'
+import productsList from './productsList'
 
 export default combineReducers({
 	product,
@@ -15,4 +17,6 @@ export default combineReducers({
 	listing,
 	editingProduct,
 	photos,
+	prevProduct,
+	productsList,
 })
