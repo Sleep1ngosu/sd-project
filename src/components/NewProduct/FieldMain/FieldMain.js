@@ -39,8 +39,8 @@ const Main = (props) => {
 		sp_id_value: '',
 		price: '0.00',
 		quantity: 0,
-		battery: 'N',
-		dangerous: 'NA',
+		battery: 'NO',
+		dangerous: 'Not Applicable',
 	}
 
 	let [data, setData] = useState({
@@ -86,6 +86,8 @@ const Main = (props) => {
 		battery,
 		dangerous,
 	} = data
+
+	console.log(is_parent)
 
 	useEffect(() => {
 		const fetch = async () => {

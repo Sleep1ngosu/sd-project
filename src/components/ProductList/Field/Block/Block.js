@@ -89,7 +89,11 @@ const Block = (props) => {
 	const startedPhoto =
 		(props.product.photos.length && props.product.photos[0].image) || null
 
-	if (props.isChildren && props.expandedIndex.indexOf(props.parent) === -1) {
+	if (
+		props.isChildren &&
+		props.expandedIndex.indexOf(props.parent) === -1 &&
+		props.type !== 'check_listing'
+	) {
 		style = { ...style, display: 'none' }
 	}
 

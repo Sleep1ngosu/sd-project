@@ -20,12 +20,14 @@ const NewProduct = ({ clearAlert, isEditing }) => {
 	}
 
 	const onClickNextField = () => {
-		setActive(active + 1)
+		setActive(+active + 1)
 	}
 
 	const onClickToStart = () => {
 		setActive(0)
 	}
+
+	console.log(active)
 
 	let renderedComponent
 	if (+active === 0) {
@@ -59,11 +61,11 @@ const NewProduct = ({ clearAlert, isEditing }) => {
 	return (
 		<div className="newProduct__wrapper">
 			<NavLinks width="17.4rem" text="Создание товара" />
-			{/* <NavBody
+			<NavBody
 				titles={titles}
 				active={active}
 				onClick={(e) => changeActive(e)}
-			/> */}
+			/>
 			{renderedComponent}
 		</div>
 	)
