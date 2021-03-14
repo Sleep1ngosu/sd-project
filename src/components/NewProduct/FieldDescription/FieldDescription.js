@@ -65,7 +65,7 @@ const FieldDescription = (props) => {
 		if (props.mode === 'Creating') {
 			await props.setDescriptionAndCreate(newData, props.id, props.products)
 		} else if (props.mode === 'Editing') {
-			await editItem(props.editingProduct, newData)
+			await props.editItem(props.editingProduct, newData)
 		}
 	}
 
@@ -135,4 +135,5 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
 	setDescription,
 	setDescriptionAndCreate,
+	editItem,
 })(FieldDescription)

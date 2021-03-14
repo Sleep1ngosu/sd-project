@@ -2,7 +2,11 @@ import { SET_EDITING, CLEAR_EDITING, TOGGLE_EDITING } from './types'
 import axios from '../utils/axios'
 import { clearProduct } from './product'
 import { clearItemType } from './itemType'
-import { setSuccessAlert, setLoadingAlert } from '../actions/alert'
+import {
+	setSuccessAlert,
+	setLoadingAlert,
+	setErrorAlert,
+} from '../actions/alert'
 
 export const setEditing = (product) => (dispatch) => {
 	dispatch({ type: SET_EDITING, payload: product })
@@ -28,6 +32,7 @@ export const editItem = (editingProduct, newProduct) => async (dispatch) => {
 		dispatch(clearEditing())
 		dispatch(setSuccessAlert('Successfully edited!'))
 	} catch (err) {
+		dispatch(setErrorAlert('Error'))
 		console.log(err.response)
 	}
 }

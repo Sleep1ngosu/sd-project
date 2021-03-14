@@ -106,7 +106,7 @@ const FieldPhoto = (props) => {
 		if (props.mode === 'Creating') {
 			await props.setPhotosAndCreate(newData, props.id, props.products)
 		} else if (props.mode === 'Editing') {
-			await editItem(props.editingProduct, newData)
+			await props.editItem(props.editingProduct, newData)
 		}
 	}
 
@@ -186,6 +186,8 @@ const mapStateToProps = (state) => {
 	}
 }
 
-export default connect(mapStateToProps, { setPhotos, setPhotosAndCreate })(
-	FieldPhoto
-)
+export default connect(mapStateToProps, {
+	setPhotos,
+	setPhotosAndCreate,
+	editItem,
+})(FieldPhoto)

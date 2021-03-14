@@ -88,7 +88,7 @@ const FieldSizes = (props) => {
 		if (props.mode === 'Creating') {
 			await props.setSizesAndCreate(newData, props.id, props.products)
 		} else if (props.mode === 'Editing') {
-			await editItem(props.editingProduct, newData)
+			await props.editItem(props.editingProduct, newData)
 		}
 	}
 
@@ -163,6 +163,8 @@ const mapStateToProps = (state) => {
 	}
 }
 
-export default connect(mapStateToProps, { setSizes, setSizesAndCreate })(
-	FieldSizes
-)
+export default connect(mapStateToProps, {
+	setSizes,
+	setSizesAndCreate,
+	editItem,
+})(FieldSizes)

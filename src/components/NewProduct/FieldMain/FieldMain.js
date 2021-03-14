@@ -143,7 +143,7 @@ const Main = (props) => {
 		if (props.mode === 'Creating') {
 			await props.setMainAndCreate(newData, props.id, products)
 		} else if (props.mode === 'Editing') {
-			await editItem(props.editingProduct, newData)
+			await props.editItem(props.editingProduct, newData)
 		}
 		props.clearItemType()
 		setData(initialData)
@@ -416,4 +416,5 @@ export default connect(mapStateToProps, {
 	clearItemType,
 	setErrorAlert,
 	setId,
+	editItem,
 })(Main)
