@@ -1,4 +1,12 @@
-import { SET_EDITING, CLEAR_EDITING, TOGGLE_EDITING } from '../actions/types'
+import {
+	SET_EDITING,
+	CLEAR_EDITING,
+	TOGGLE_EDITING,
+	SET_EDITING_MAIN,
+	SET_EDITING_DESCRIPTION,
+	SET_EDITING_PHOTOS,
+	SET_EDITING_DIMENSIONS,
+} from '../actions/types'
 
 const initialState = {
 	isEditing: false,
@@ -33,6 +41,55 @@ const EditingProductReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isEditing: !state.isEditing,
+				editingProduct: {
+					description: {},
+					photos: [],
+					dimensions: {},
+				},
+			}
+		}
+		case SET_EDITING_MAIN: {
+			return {
+				...state,
+				editingProduct: {
+					...action.payload,
+					description: state.editingProduct.description,
+					photos: state.editingProduct.photos,
+					dimensions: state.editingProduct.dimensions,
+				},
+			}
+		}
+		case SET_EDITING_DESCRIPTION: {
+			return {
+				...state,
+				editingProduct: {
+					...state.editingProduct,
+					description: action.payload,
+					photos: state.editingProduct.photos,
+					dimensions: state.editingProduct.dimensions,
+				},
+			}
+		}
+		case SET_EDITING_PHOTOS: {
+			return {
+				...state,
+				editingProduct: {
+					...state.editingProduct,
+					description: state.editingProduct.description,
+					photos: action.payload,
+					dimensions: state.editingProduct.dimensions,
+				},
+			}
+		}
+		case SET_EDITING_DIMENSIONS: {
+			return {
+				...state,
+				editingProduct: {
+					...state.editingProduct,
+					description: state.editingProduct.description,
+					photos: state.editingProduct.photos,
+					dimensions: action.payload,
+				},
 			}
 		}
 		default:

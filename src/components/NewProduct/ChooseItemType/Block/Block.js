@@ -7,6 +7,7 @@ const Block = (props) => {
 	const onClick = () => {
 		props.setId(props.id)
 		props.toggleItemtype()
+		props.onChange(props.id)
 	}
 
 	return (

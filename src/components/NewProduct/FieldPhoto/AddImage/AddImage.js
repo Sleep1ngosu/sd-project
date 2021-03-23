@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import './AddImage.scss'
 import InputBlockSelect from '../../InputBlockSelect/InputBlockSelect'
-import arrays from '../../../../variables/arrays'
 import AddPhotoIcon from '../../../../assets/icons/AddPhotoIcon.png'
 import LoadPhoto from '../LoadPhoto/LoadPhoto'
 import closeIcon from '../../../../assets/icons/closeIcon.png'
+import { options } from './AddImage.config'
 
 const AddImage = (props) => {
 	let addPhotoStyle
+
+	let [file, setFile] = useState(props.image.image || '')
 
 	if (props.id === props.active) {
 		addPhotoStyle = { display: 'block' }
@@ -15,12 +17,22 @@ const AddImage = (props) => {
 		addPhotoStyle = { display: 'none' }
 	}
 
+	const onChangeFile = (e) => {
+		const file = e.target.files[0]
+		const image = URL.createObjectURL(file)
+		setFile(image)
+		props.setActivePhotoAdd(undefined)
+		props.onChangeFile(e)
+	}
+
+	console.log(file)
+
 	return (
 		<div className="newProduct__fieldPhoto__wrapper">
 			<div className="newProduct__fieldPhoto__input">
 				<InputBlockSelect
 					label="Photo type"
-					options={arrays.newProductMain.photoField.photoType.options}
+					options={options}
 					widthBlock="91.6rem"
 					inputWidth="81.1rem"
 					name={props.photoTypeName}
@@ -30,9 +42,7 @@ const AddImage = (props) => {
 				/>
 				<div className="file">
 					<div className="label">File status: </div>
-					<div className="filename">
-						{!props.image.image ? 'Not uploaded' : 'Uploaded'}
-					</div>
+					<div className="filename">{!file ? 'Not uploaded' : 'Uploaded'}</div>
 				</div>
 			</div>
 			<div className="newProduct__fieldPhoto__addPhotoIcon__wrapper">
@@ -41,10 +51,14 @@ const AddImage = (props) => {
 						onClick={(e) => props.onClick(e, props.image.id_client)}
 						className="newProduct__fieldPhoto__addPhotoIcon__icon"
 					>
-						<img src={AddPhotoIcon} alt="add photo icon" />
+						{file ? (
+							<img className="image" src={file} alt="photo" />
+						) : (
+							<img className="image" src={AddPhotoIcon} alt="add photo icon" />
+						)}
 					</div>
 					<LoadPhoto
-						onChange={props.onChangeFile}
+						onChange={onChangeFile}
 						style={addPhotoStyle}
 						onClose={(e) => props.onClose(e)}
 						id={props.id}

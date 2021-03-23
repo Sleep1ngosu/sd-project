@@ -5,11 +5,14 @@ import Button from '../FieldMain/Button/Button'
 import AddImage from './AddImage/AddImage'
 import { setPhotos, setPhotosAndCreate } from '../../../actions/product'
 import Alert from '../../Alert/Alert'
-import { editItem } from '../../../actions/editingProduct'
-
+import { editItem, setEditingPhotos } from '../../../actions/editingProduct'
 import uuid from 'react-uuid'
+import { ButtonStyle } from './FieldPhoto.styles'
+import { initialState } from './FieldPhoto.config'
 
 const FieldPhoto = (props) => {
+	const isCreating = props.mode === 'Creating' || false
+
 	let formStyle = {
 		height: props.height,
 		paddingTop: props.paddingTop,
@@ -34,13 +37,6 @@ const FieldPhoto = (props) => {
 	let [data, setData] = useState(usedPhotos)
 	let counter = data.length
 	let [activePhotoAdd, setActivePhotoAdd] = useState(undefined)
-
-	let ButtonStyle = {
-		backgroundColor: '#FFBA0A',
-		border: '.1rem solid #EDB014',
-		color: 'white',
-		width: '14rem',
-	}
 
 	const onChange = (e, id) => {
 		let arr = []
@@ -85,14 +81,15 @@ const FieldPhoto = (props) => {
 			reader.onloadend = () => {
 				newData.forEach((object, index) => {
 					if (object.id_client === e.target.id) {
-						newData[index].image = reader.result.split(',')[1]
+						// newData[index].image = reader.result.split(',')[1]
+						newData[index].image = reader.result
+						console.log(newData)
 						setData([...newData])
 					}
 				})
 			}
 			reader.readAsDataURL(file)
 		}
-		setActivePhotoAdd(undefined)
 	}
 
 	const onSubmit = async (e) => {
@@ -103,15 +100,24 @@ const FieldPhoto = (props) => {
 			dimensions: props.data.dimensions,
 			photos: data,
 		}
+		const newDataEditing = {
+			...props.editingProduct,
+			description: props.editingProduct.description,
+			dimensions: props.editingProduct.dimensions,
+			photos: data,
+		}
 		if (props.mode === 'Creating') {
 			await props.setPhotosAndCreate(newData, props.id, props.products)
 		} else if (props.mode === 'Editing') {
-			await props.editItem(props.editingProduct, newData)
+			await props.editItem(props.editingProduct, newDataEditing)
 		}
+		setData(initialState)
 	}
 
 	const onClickNextButton = () => {
-		props.setPhotos(data)
+		isCreating
+			? props.setPhotos(data)
+			: props.setEditingPhotos(data, props.editingProduct.id)
 		props.onClickNextField()
 	}
 
@@ -139,6 +145,7 @@ const FieldPhoto = (props) => {
 				id_client={e.id_client}
 				onChangeFile={(e) => onChangeFile(e)}
 				image={e}
+				setActivePhotoAdd={setActivePhotoAdd}
 			/>
 		)
 	})
@@ -190,4 +197,5 @@ export default connect(mapStateToProps, {
 	setPhotos,
 	setPhotosAndCreate,
 	editItem,
+	setEditingPhotos,
 })(FieldPhoto)

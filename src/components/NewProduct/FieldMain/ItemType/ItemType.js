@@ -26,14 +26,11 @@ const ItemType = (props) => {
 					onChange={(e) => props.onChange(e)}
 				/>
 				<div className="itemType__input__search">
-					<div
-						onClick={onClick}
-						className="itemType__input__search__icon"
-					>
+					<div onClick={onClick} className="itemType__input__search__icon">
 						<img src={SearchIcon} alt="search-icon" />
 					</div>
 					<div>
-						<ChooseItemType />
+						<ChooseItemType value={props.value} onChange={props.onChange} />
 					</div>
 				</div>
 			</div>

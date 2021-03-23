@@ -12,9 +12,6 @@ const LaunchDate = () => {
 					className="launchDate__input__input"
 					disabled="disabled"
 				/>
-				<div className="launchDate__input__icon">
-					<img src={CalendarIcon} alt="calendar-icon" />
-				</div>
 			</div>
 		</div>
 	)

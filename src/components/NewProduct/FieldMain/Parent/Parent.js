@@ -15,6 +15,12 @@ const Parent = (props) => {
 		)
 	})
 
+	optionsList.unshift(
+		<MenuItem value="" key={`option__empty`}>
+			None
+		</MenuItem>
+	)
+
 	const selectStyle = (!props.isParent && { display: 'block' }) || {
 		display: 'none',
 	}

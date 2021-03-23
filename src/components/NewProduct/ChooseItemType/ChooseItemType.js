@@ -38,6 +38,7 @@ const ChooseItemType = (props) => {
 				path={itemType.path_by_name}
 				type={itemType.product_type_definitions}
 				id={itemType.id}
+				onChange={props.onChange}
 			/>
 		)
 	})

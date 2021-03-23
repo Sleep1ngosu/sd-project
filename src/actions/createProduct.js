@@ -13,6 +13,12 @@ export const createProduct = (requestData, itemType, products) => async (
 ) => {
 	try {
 		await dispatch(setLoadingAlert('loading...'))
+		requestData.photos.forEach((photo) => {
+			if (photo.image) {
+				const newImageBase64 = photo.image.split(',')[1]
+				photo.image = newImageBase64
+			}
+		})
 		const URI = '/products/new_product'
 		const data = {
 			...requestData,
@@ -34,12 +40,13 @@ export const createProduct = (requestData, itemType, products) => async (
 				data.parent_id = id
 			}
 		}
-		const response = await axios.post(URI, data)
-		console.log(response)
-		dispatch(setPrevProduct(data))
-		dispatch(clearProduct())
-		dispatch(clearItemType())
-		dispatch(setSuccessAlert('Successfully created!'))
+		// const response = await axios.post(URI, data)
+		// console.log(response)
+		// dispatch(setPrevProduct(data))
+		// dispatch(clearProduct())
+		// dispatch(clearItemType())
+		// dispatch(setSuccessAlert('Successfully created!'))
+		console.log(data)
 	} catch (err) {
 		console.log(err.response)
 

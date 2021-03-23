@@ -1,4 +1,12 @@
-import { SET_EDITING, CLEAR_EDITING, TOGGLE_EDITING } from './types'
+import {
+	SET_EDITING,
+	CLEAR_EDITING,
+	TOGGLE_EDITING,
+	SET_EDITING_MAIN,
+	SET_EDITING_DESCRIPTION,
+	SET_EDITING_PHOTOS,
+	SET_EDITING_DIMENSIONS,
+} from './types'
 import axios from '../utils/axios'
 import { clearProduct } from './product'
 import { clearItemType } from './itemType'
@@ -35,4 +43,24 @@ export const editItem = (editingProduct, newProduct) => async (dispatch) => {
 		dispatch(setErrorAlert('Error'))
 		console.log(err.response)
 	}
+}
+
+export const setEditingMain = (main, id) => (dispatch) => {
+	const data = { ...main, id }
+	dispatch({ type: SET_EDITING_MAIN, payload: data })
+}
+
+export const setEditingDescription = (description, id) => (dispatch) => {
+	const data = { ...description, id }
+	dispatch({ type: SET_EDITING_DESCRIPTION, payload: data })
+}
+
+export const setEditingPhotos = (photos, id) => (dispatch) => {
+	const data = { ...photos, id }
+	dispatch({ type: SET_EDITING_PHOTOS, payload: data })
+}
+
+export const setEditingDimensions = (dimensions, id) => (dispatch) => {
+	const data = { ...dimensions, id }
+	dispatch({ type: SET_EDITING_DIMENSIONS, payload: data })
 }
